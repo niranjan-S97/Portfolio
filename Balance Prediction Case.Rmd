@@ -1,0 +1,383 @@
+---
+title: "Balance Prediction Linear Regression"
+author: "Niranjan"
+date: "21 December 2018"
+output: html_document
+---
+
+### Loading the required packages
+```{r include=FALSE}
+library(data.table)
+library(dplyr)
+library(caret)
+library(rcompanion)
+library(fastDummies)
+library(DescTools)
+options(scipen = 999)
+```
+
+### Importing the case file and examining it
+```{r}
+cust_data <- fread("~/Case studies/Linear Regression/Cust_Database.csv")
+str(cust_data)
+
+cust_ <- cust_data
+```
+
+
+### Making necessary changes to variable types
+```{r}
+cust_$region <- factor(cust_data$region,levels = c(1,2,3,4,5),labels = c("zone 1","zone 2","zone 3","zone 4", "zone 5"))
+cust_$townsize <- factor(cust_$townsize, levels = c(1,2,3,4,5),labels = c("> 250,000","50,000-249,999","10,000-49,999","2,500-9,999","< 2,500"))
+cust_$gender <- factor(cust_$gender, levels = c(0,1),labels = c("Male","Female"))
+cust_$agecat <- factor(cust_$agecat, levels = c(1,2,3,4,5,6,9), labels = c("<18","18-24","25-34","35-49","50-64",">65","No response"))
+cust_$birthmonth <- factor(cust_$birthmonth, levels = c("April","August","December","February","January","July","June","March","May","November","October","September"), labels = c("April","August","December","February","January","July","June","March","May","November","October","September"))
+cust_$edcat <- ordered(cust_$edcat, levels = c(1,2,3,4,5), labels = c("Did not complete high school","High school degree","Some college","College degree","Post-undergraduate degree"))
+cust_$jobcat <- factor(cust_$jobcat, levels= c(1,2,3,4,5,6), labels = c("Managerial and Professional","Sales and Office","Service","Agricultural and Natural Resources","Precision Production, Craft, Repair","Operation, Fabrication, General Labor"))
+cust_$jobcat <- factor(cust_$union, levels = c(0,1),labels = c("No","Yes"))
+cust_$employ <- as.factor(cust_$employ)
+cust_$empcat <- factor(cust_$empcat, levels = c(1,2,3,4,5), labels = c("Less than 2","2 to 5","6 to 10","11 to 15","More than 15"))
+cust_$retire <- factor(cust_$retire, levels = c(0,1), labels = c("No","Yes"))
+cust_$inccat <- ordered(cust_$inccat, levels = c(1,2,3,4,5), labels = c("Under $25","$25 - $49","$50 - $74","$75 - $124","$125+"))
+cust_$default <- factor(cust_$default, levels = c(0,1), labels = c("No","Yes"))
+cust_$jobsat <- ordered(cust_$jobsat, levels = c(1,2,3,4,5), labels = c("Highly dissatisfied","Somewhat dissatisfied","Neutral","Somewhat satisfied","Highly satisfied") )
+cust_$marital <- factor(cust_$marital, levels = c(0,1), labels = c("Unmarried","Married"))
+cust_$spousedcat <- factor(cust_$spousedcat, levels = c(-1,1,2,3,4,5),labels = c("Not married","Did not complete high school","High school degree","Some college","College degree","Post-undergraduate degree"))
+cust_$homeown <- factor(cust_$homeown, levels = c(0,1), labels = c("Rent","Own"))
+cust_$hometype <- factor(cust_$hometype, levels = c(1,2,3,4), labels = c("Single-family","Multiple-Family","Condominium/Townhouse","Mobile Home"))
+cust_$address <- as.factor(cust_$address)
+cust_$addresscat <-  ordered(cust_$addresscat, levels = c(1,2,3,4,5), labels = c("Less than 3","4 to 7","8 to 15","16 to 25","More than 25"))
+cust_$cars <- as.ordered(cust_$cars)
+cust_$carown <- factor(cust_$carown, levels = c(-1,0,1), labels = c("N/A","Lease","Own"))
+cust_$cartype <- factor(cust_$cartype, levels = c(-1,0,1), labels = c("N/A","Domestic","Import"))
+cust_$carcatvalue <- ordered(cust_$carcatvalue, levels = c(-1,1,2,3), labels = c("N/A","Economy","Standard","Luxury"))
+cust_$carbought <-factor(cust_$carbought, levels= c(-1,0,1), labels = c("N/A","No","Yes"))
+cust_$carbuy <- factor(cust_$carbuy, levels = c(0,1), labels = c("No","Yes"))
+cust_$commute <- factor(cust_$commute, levels = c(1,2,3,4,5,6,7,8,9,10), labels = c("Car","Motorcycle","Carpool","Bus","Train/Subway","Other public transit","Bicycle","Walk","Other non-motorized transit","Telecommute"))
+cust_$commutecat <- factor(cust_$commutecat, levels = c(1,2,3,4,5), labels = c("Single occupancy","Multiple occupancy","Public transportation","Non-motorized","Telecommute"))
+cust_$commutecar <- factor(cust_$commutecar, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutemotorcycle <- factor(cust_$commutemotorcycle, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutecarpool<- factor(cust_$commutecarpool, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutebus <- factor(cust_$commutebus, levels = c(0,1), labels = c("No","Yes"))
+cust_$commuterail<- factor(cust_$commuterail, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutepublic <- factor(cust_$commutepublic, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutebike <- factor(cust_$commutebike, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutewalk <- factor(cust_$commutewalk, levels = c(0,1), labels = c("No","Yes"))
+cust_$commutenonmotor <- factor(cust_$commutenonmotor, levels = c(0,1), labels = c("No","Yes"))
+cust_$telecommute <- factor(cust_$telecommute, levels = c(0,1), labels = c("No","Yes"))
+cust_$reason <- factor(cust_$reason, levels = c(1,2,3,4,8,9), labels = c("Prices","Convenience","Service","Other","N/A","No response"))
+cust_$polview <- factor(cust_$polview, levels = c(1,2,3,4,5,6,7), labels = c("Extremely liberal","Liberal","Slightly liberal","Moderate","Slightly conservative","Conservative","Extremely conservative"))
+cust_$polparty <- factor(cust_$polparty, levels = c(0,1), labels = c("No","Yes"))
+cust_$polcontrib <- factor(cust_$polcontrib, levels = c(0,1), labels = c("No","Yes"))
+cust_$vote <- factor(cust_$vote, levels = c(0,1), labels = c("No","Yes"))
+cust_$card <- factor(cust_$card, levels = c(1,2,3,4,5), labels = c("American Express","Visa","Mastercard","Discover","Other"))
+cust_$cardtype <- factor(cust_$cardtype, levels = c(1,2,3,4), labels = c("None","Gold","Platinum","Other"))
+cust_$cardbenefit <- factor(cust_$cardbenefit, levels = c(1,2,3,4), labels = c("None","Cash back","Airline miles","Other"))
+cust_$cardfee <- factor(cust_$cardfee, levels = c(0,1), labels = c("No","Yes"))
+cust_$cardtenure <- ordered(cust_$cardtenure)
+cust_$cardtenurecat <- ordered(cust_$cardtenure, levels= c(1,2,3,4,5), labels= c("Less than 2","2 to 5","6 to 10","11 to 15","More than 15"))
+cust_$card2 <- factor(cust_$card2, levels = c(1,2,3,4,5), labels = c("American Express","Visa","Mastercard","Discover","Other"))
+cust_$card2type <- factor(cust_$card2type, levels = c(1,2,3,4), labels = c("None","Gold","Platinum","Other"))
+cust_$card2benefit <- factor(cust_$card2benefit, levels = c(1,2,3,4), labels = c("None","Cash back","Airline miles","Other"))
+cust_$card2fee <- factor(cust_$card2fee, levels = c(0,1), labels = c("No","Yes"))
+cust_$card2tenure <- ordered(cust_$card2tenure)
+cust_$card2tenurecat <- ordered(cust_$card2tenure, levels= c(1,2,3,4,5), labels= c("Less than 2","2 to 5","6 to 10","11 to 15","More than 15"))
+cust_$active <- factor(cust_$active, levels = c(0,1), labels = c("No","Yes"))
+cust_$bfast <- factor(cust_$bfast, levels = c(1,2,3), labels = c("Energy bar","Oatmeal","Cereal"))
+cust_$churn <- factor(cust_$churn, levels = c(0,1), labels = c("No","Yes"))
+cust_$tollfree <- factor(cust_$tollfree, levels = c(0,1), labels = c("No","Yes"))
+cust_$equip <- factor(cust_$equip, levels = c(0,1), labels = c("No","Yes"))
+cust_$callcard <- factor(cust_$callcard, levels = c(0,1), labels = c("No","Yes"))
+cust_$wireless <- factor(cust_$wireless, levels = c(0,1), labels = c("No","Yes"))
+cust_$multline <- factor(cust_$multline, levels = c(0,1), labels = c("No","Yes"))
+cust_$voice <- factor(cust_$voice, levels = c(0,1), labels = c("No","Yes"))
+cust_$pager <- factor(cust_$pager, levels = c(0,1), labels = c("No","Yes"))
+cust_$internet <- factor(cust_$internet, levels = c(0,1,2,3,4), labels = c("None", "Dia-up","DSL","Cable modem","Other"))
+cust_$callid <- factor(cust_$callid, levels = c(0,1), labels = c("No","Yes"))
+cust_$callwait <- factor(cust_$callwait, levels = c(0,1), labels = c("No","Yes"))
+cust_$forward <- factor(cust_$forward, levels = c(0,1), labels = c("No","Yes"))
+cust_$confer <- factor(cust_$confer, levels = c(0,1), labels = c("No","Yes"))
+cust_$ebill <- factor(cust_$ebill, levels = c(0,1), labels = c("No","Yes"))
+cust_$owntv <- factor(cust_$owntv, levels = c(0,1), labels = c("No","Yes"))
+cust_$ownvcr <- factor(cust_$ownvcr, levels = c(0,1), labels = c("No","Yes"))
+cust_$owndvd <- factor(cust_$owndvd, levels = c(0,1), labels = c("No","Yes"))
+cust_$owncd <- factor(cust_$owncd, levels = c(0,1), labels = c("No","Yes"))
+cust_$ownpda <- factor(cust_$ownpda, levels = c(0,1), labels = c("No","Yes"))
+cust_$ownpc <- factor(cust_$ownpc, levels = c(0,1), labels = c("No","Yes"))
+cust_$ownipod <- factor(cust_$ownipod, levels = c(0,1), labels = c("No","Yes"))
+cust_$owngame <- factor(cust_$owngame, levels = c(0,1), labels = c("No","Yes"))
+cust_$ownfax <- factor(cust_$ownfax, levels = c(0,1), labels = c("No","Yes"))
+cust_$news <- factor(cust_$news, levels = c(0,1), labels = c("No","Yes"))
+cust_$response_01 <- factor(cust_$response_01, levels = c(0,1), labels = c("No","Yes"))
+cust_$response_02 <- factor(cust_$response_02, levels = c(0,1), labels = c("No","Yes"))
+cust_$response_03 <- factor(cust_$response_03, levels = c(0,1), labels = c("No","Yes"))
+```
+
+### A user defined function to see about the data
+```{r}
+about_nums <- function(x){
+  
+  n = length(x)
+  nmiss = sum(is.na(x))
+  nmiss_pct = (mean(is.na(x)))*100
+  sum = sum(x, na.rm=T)
+  mean = mean(x, na.rm=T)
+  median = quantile(x, p=0.5, na.rm=T)
+  std = sd(x, na.rm=T)
+  var = var(x, na.rm=T)
+  range = max(x, na.rm=T)-min(x, na.rm=T)
+  pctl = quantile(x, p=c(0, 0.01, 0.05,0.1,0.25,0.5, 0.75,0.9,0.95,0.99,1), na.rm=T)
+  return(c(N=n, Nmiss =nmiss, Nmiss_pct = nmiss_pct, sum=sum, avg=mean, meidan=median, std=std, var=var, range=range, pctl=pctl))
+  
+}
+
+about_cats <- function(x){
+  
+  n = length(x)
+  nmiss = sum(is.na(x))
+  nmiss_pct = (mean(is.na(x)))*100
+  return(c(N=n, Nmiss =nmiss, Nmiss_pct = nmiss_pct))
+  
+}
+```
+
+### Taking numerics and non-numerics as two subsets
+```{r}
+numerics <- names(cust_)[sapply(cust_, is.numeric)]
+# cust_nums <- cust_[,..numerics,] ------> creates subset of numeric vars
+
+non_nums <- as.data.frame(names(cust_))
+nums <- as.data.frame(numerics)
+rest <- non_nums[!non_nums$`names(cust_)`%in%nums$numerics,]
+rest <- as.vector(rest)
+# non_nums <- cust_[,..rest,] -------> creates subset of non-nums
+```
+
+## Examining through the variables
+### Numeric
+```{r}
+numbs <- as.data.frame(t(sapply(cust_[,..numerics,], about_nums))) 
+kep <- row.names(numbs[numbs$Nmiss_pct<50,]) # -------- removing variables with missing more than 50% missing
+numerics_cust <- cust_[,..kep]
+# For the rest of the variables with missing, the mean value is inserted
+miss_treat_num = function(x){
+  x[is.na(x)] = mean(x,na.rm=T) # replace missings with mean
+  return(x)
+}
+numerics_cust <- data.table(apply(numerics_cust,2, FUN = miss_treat_num))
+numbs <- as.data.frame(t(sapply(numerics_cust, about_nums))) 
+fwrite(numbs,"~/Case studies/Linear Regression/num_outliers.csv")
+```
+
+
+# Capping outliers in the data
+```{r include=FALSE}
+sapply(cust_[,..numerics,],boxplot) #--------- Boxplot is used to visualize this
+```
+
+### Capping with 95 percentile
+```{r}
+outlier_treat_95 <- function(x){
+  UC1 = quantile(x, p=0.95,na.rm=T)
+  LC1 = quantile(x, p=0.05,na.rm=T)
+
+  x=ifelse(x>UC1, UC1, x)
+  x=ifelse(x<LC1, LC1, x)
+  return(x)
+}
+
+cap95 <- numerics_cust[,c(1,21)]
+cap95 <- data.table(apply(cap95,2, FUN = outlier_treat_95))
+```
+
+### Capping with 99 percentile value
+```{r}
+outlier_treat_99 <- function(x){
+  UC1 = quantile(x, p=0.99,na.rm=T)
+  LC1 = quantile(x, p=0.01,na.rm=T)
+  
+  x=ifelse(x>UC1, UC1, x)
+  x=ifelse(x<LC1, LC1, x)
+  return(x)
+}
+
+cap99 <- numerics_cust[,c(-1,-21)]
+cap99 <- data.table(apply(cap99,2, FUN = outlier_treat_99))
+
+numerics_cust <- cbind(cap95,cap99)
+```
+
+## Categorical
+```{r}
+cats <- as.data.frame(t(sapply(cust_[,-..numerics,], about_cats)))
+
+cat_cust <- cust_[,-..numerics,]
+cat_cust$cardtenurecat <- NULL
+cat_cust$card2tenurecat <- NULL
+
+cust_final <- cbind(numerics_cust,cat_cust)
+cust_final$total_spent <- cust_final$cardspent+cust_final$card2spent 
+```
+
+## Checking regression assumptions
+### Normality of Y variable
+```{r}
+plotNormalHistogram(cust_final$total_spent)
+shapiro.test(cust_final$total_spent)
+# This is not normal hence it is transformed
+cust_final$total_spent_sqrt <-  sqrt(cust_final$total_spent)
+plotNormalHistogram(cust_final$total_spent_sqrt)
+
+cust_final$total_spent_sqrt <-  sqrt(cust_final$total_spent)
+```
+#### This shows a more normal distribution, thus this will be used as Y
+
+### Checking if Y variables and X Variables are correlated
+```{r}
+numerics_cust <- cbind(numerics_cust,total_spent_sqrt=cust_final$total_spent_sqrt,total_spent = cust_final$total_spent)
+cormat <- as.data.frame(cor(numerics_cust))
+fwrite(cormat,"~/Case studies/Linear Regression/cormat.csv",row.names = T)
+remove_ <- c("age","union","debtinc","spoused","reside","pets","pets_cats","pets_dogs","pets_birds",
+             "pets_reptiles","pets_small","pets_saltfish","pets_freshfish","commutetime","tenure","longmon",
+             "lnlongmon","longten","lnlongten","tollmon","equipmon","equipten","cardmon","lncardmon",
+             "cardten","lncardten","wiremon","hourstv")
+# removing all numeric variables that are nor correlated with total_spent
+cust_final <- cust_final[,-..remove_,] 
+# removing variables with high inter-item correlation with 0.6 as limit
+remove_ <- c("carvalue","income","creddebt","lnothdebt","card2items")
+cust_final <- cust_final[,-..remove_,] 
+```
+
+### Checking the relationship of categorical X variables with Y variable
+```{r}
+Anov <- function(x){
+summary(aov(cust_final$total_spent~x))
+}
+
+cat_cust$custid <- NULL 
+apply(cat_cust, 2, FUN = Anov)
+# Categories that are insignificant are removed except for those that needed to be kept in relation to analysis
+remove_ <- c("townsize","birthmonth","jobcat","default","marital","cars","carbought","carbuy","commute","commutecat",
+             "commutecar","commutemotorcycle","commutecarpool","commutebus","commuterail","commutepublic",
+             "commutewalk","commutenonmotor","telecommute","polparty","response_01","response_02")
+cust_final <- cust_final[,-..remove_,] 
+```
+
+### Creating dummy variables and preparing data for building the model 
+```{r}
+cust_final$custid <- NULL 
+ordered <- names(cust_final)[sapply(cust_final, is.ordered)]
+cust_ordered <- cust_final[,..ordered,]
+cust_final <- cust_final[,-..ordered,]
+factor <- names(cust_final)[sapply(cust_final, is.factor)]
+dd <- dummy_cols(cust_final, remove_first_dummy = TRUE)
+cust_final <- dd[,-..factor,]
+cust_final <- cbind(cust_final,cust_ordered)
+```
+
+## Building the Regression model
+### Taking samples
+```{r}
+set.seed(654)
+samp <-  sample(1:nrow(cust_final),size = floor(nrow(cust_final)*0.7))
+Dev <- cust_final[samp,] 
+Test <- cust_final[-samp,] 
+
+fit <- lm(total_spent_sqrt~.,data = Dev)
+summary(fit)
+```
+#### This model still has variables that are not significant
+
+```{r}
+fit2 <- lm(total_spent_sqrt~ed+lncreddebt+carditems+cardspent+card2spent+`agecat_>65`+`agecat_50-64`+
+             `agecat_35-49`+employ_1+employ_10+employ_11+employ_15+employ_8+employ_12+employ_27+
+             employ_2+employ_18+employ_15+employ_28+employ_26+employ_7+employ_9+employ_20+employ_34+employ_35+
+             employ_38+`spousedcat_College degree`+`carown_N/A`+`card_American Express`+cardtype_Other+
+             cardtype_Platinum+card2_Discover+card2_Mastercard+`card2_American Express`+card2_Visa+
+             churn_No+voice_No+pager_No,data = Dev)
+summary(fit2)
+```
+#### To get the best model, a stepwise regression is done
+
+### Stepwise regression is used to get better valid predictors
+```{r}
+step(fit2,direction = "both")
+
+# Model given after stepwise regression
+fit3 <- lm(formula = total_spent_sqrt ~ ed + lncreddebt + carditems + 
+              cardspent + card2spent + `agecat_50-64` + `agecat_35-49` + 
+              employ_27 + employ_2 + employ_18 + employ_20 + employ_35 + 
+              employ_38 + `spousedcat_College degree` + `card_American Express` + 
+              cardtype_Other + card2_Discover + card2_Mastercard + `card2_American Express` + 
+              card2_Visa + churn_No + voice_No, data = Dev)
+
+summary(fit3)
+```
+#### This model is further perfected
+
+```{r}
+fit4 <- lm(formula = total_spent_sqrt ~ ed + lncreddebt + carditems + 
+             cardspent + card2spent + `agecat_50-64` + `agecat_35-49` + 
+             employ_27 + employ_20 + employ_35 + 
+             employ_38 + `spousedcat_College degree` + `card_American Express` + 
+             cardtype_Other + card2_Mastercard + `card2_American Express` + 
+             card2_Visa + churn_No + voice_No, data = Dev)
+
+summary(fit4)
+```
+
+### The VIF is being studied for this model
+```{r}
+library(car)
+(VIF <- vif(fit4))
+# VIF of all variables into consideration are below 5
+(tolerance <- 1/VIF)
+# The tolerance level for all the levels are above the required 0.2
+```
+
+### The model is put to test for the accuracy on the model and the testing data
+```{r}
+dev1 <- data.frame(cbind(Dev, pred_sq = predict(fit4, newdata=Dev)))
+dev1$pred <- (dev1$pred_sq)^2
+val1 <- data.frame(cbind(Test, pred_sq = predict(fit4, newdata=Test)))
+val1$pred <- (val1$pred_sq)^2
+```
+
+### Now to verify all the measures to see model accuracy
+
+### MAPE
+```{r}
+DescTools::MAPE(x=dev1$pred,dev1$total_spent)
+DescTools::MAPE(x=val1$pred,val1$total_spent)
+```
+#### The MAPE value for both are same and are well under the required levels
+
+### RMSE
+```{r}
+DescTools::RMSE(x=dev1$pred,dev1$total_spent)
+DescTools::RMSE(x=val1$pred,val1$total_spent)
+```
+#### Given the range of the total spent, RMSE is low and hence the model is a good fit
+
+## Decile analysis
+### creating the deciles
+```{r}
+decLocations <- quantile(val1$pred, probs = seq(0.1,0.9,by=0.1))
+val1$decile <- findInterval(val1$pred,c(-Inf,decLocations, Inf))
+
+val_decile <- val1 %>% group_by(decile) %>% 
+  dplyr::summarise(count = n(),
+                   avg_pred_spend = mean(pred),
+                   avg_spend = mean(total_spent)
+  ) %>% 
+  dplyr::arrange(desc(decile))
+
+require(ggplot2)
+Decile_Plot <- ggplot(val_decile)+aes(x = factor(decile),y = avg_pred_spend) +
+  geom_bar(stat = "identity",fill = "green")
+plot(Decile_Plot)
+```
+#### The decile plot reveals that there is a staircase effect created by the model. Thus, making it a reliable model to use.
+
+#### Of the factors that influence the balanec in a positive way, the top 5 factors are having an American Express card as the primary and secondary card, being in the age category of 35-49 or 50-64 and number of items on primary card. The factors that have a negative impact on the balance value is being with an employer for 35 or 20 years. The negative predictors can be made better.
+
