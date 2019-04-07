@@ -1,0 +1,36 @@
+[0606/165309:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0606/165309:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0606/165314:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0606/165314:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/144808:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/144813:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/154647:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/155829:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/155905:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/155924:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/191958:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/192001:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/193916:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0609/193916:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0611/115231:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0611/115234:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0611/121347:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0611/162811:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0611/162811:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0613/195848:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0613/195849:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0613/200212:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0613/200212:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0613/200338:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0616/215111:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0616/215112:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0616/215429:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0616/215429:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0726/074308:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0726/074311:WARNING:resource_bundle.cc(311)] locale_file_path.empty() for locale 
+[0407/003223.288:ERROR:file_io_win.cc(179)] CreateFile C:\Program Files (x86)\settings.dat: Access is denied. (0x5)
+[0407/003223.311:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0407/003223.313:ERROR:file_io_win.cc(179)] CreateFile C:\Program Files (x86)\settings.dat: Access is denied. (0x5)
+[0407/003519.919:ERROR:file_io_win.cc(179)] CreateFile C:\Program Files (x86)\settings.dat: Access is denied. (0x5)
+[0407/003519.925:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[0407/003519.927:ERROR:file_io_win.cc(179)] CreateFile C:\Program Files (x86)\settings.dat: Access is denied. (0x5)

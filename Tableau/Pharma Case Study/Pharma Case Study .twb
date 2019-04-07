@@ -1,0 +1,2230 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20181.18.0510.1418                               -->
+<workbook original-version='18.1' source-build='2018.1.1 (20181.18.0510.1418)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <SortTagCleanup />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='Top N' datatype='integer' name='[Product Base Margin Parameter]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+        <calculation class='tableau' formula='10' />
+        <range max='1218' min='0' />
+      </column>
+    </datasource>
+    <datasource caption='Rx+Returns (Pharma Sales Data)' inline='true' name='federated.0xrfp400he6f3111x0rl60h5e91o' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Pharma Sales Data' name='excel-direct.0g7s7iz1qk9rxv1f7qgzu1814gzt'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='G:/Data Analytics/A Labs/4 Tableau/CS 2/Pharma Sales Data.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[Rx].[Order ID]' />
+              <expression op='[Returns].[Order ID]' />
+            </expression>
+          </clause>
+          <relation connection='excel-direct.0g7s7iz1qk9rxv1f7qgzu1814gzt' name='Rx' table='[Rx$]' type='table'>
+            <columns gridOrigin='A1:Q8400:no:A1:Q8400:0' header='yes' outcome='2'>
+              <column datatype='integer' name='Order ID' ordinal='0' />
+              <column datatype='date' name='Date' ordinal='1' />
+              <column datatype='integer' name='Rx Quantity' ordinal='2' />
+              <column datatype='real' name='Rx Dollars' ordinal='3' />
+              <column datatype='real' name='Discount' ordinal='4' />
+              <column datatype='real' name='Rx Profit' ordinal='5' />
+              <column datatype='real' name='Unit Price' ordinal='6' />
+              <column datatype='string' name='Dispensed Pharmacy' ordinal='7' />
+              <column datatype='string' name='Dispensed State' ordinal='8' />
+              <column datatype='integer' name='Dispensed Zip Code' ordinal='9' />
+              <column datatype='string' name='Dispensed Region' ordinal='10' />
+              <column datatype='string' name='Market Segment' ordinal='11' />
+              <column datatype='string' name='Drug Supplier' ordinal='12' />
+              <column datatype='string' name='Drug Dosage Form' ordinal='13' />
+              <column datatype='string' name='Drug Name' ordinal='14' />
+              <column datatype='string' name='Drug Route' ordinal='15' />
+              <column datatype='real' name='Product Base Margin' ordinal='16' />
+            </columns>
+          </relation>
+          <relation connection='excel-direct.0g7s7iz1qk9rxv1f7qgzu1814gzt' name='Returns' table='[Returns$]' type='table'>
+            <columns gridOrigin='A1:C573:no:A1:C573:0' header='yes' outcome='6'>
+              <column datatype='integer' name='Order ID' ordinal='0' />
+              <column datatype='string' name='Status' ordinal='1' />
+              <column datatype='string' name='Reason' ordinal='2' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[Date]' value='[Rx].[Date]' />
+          <map key='[Discount]' value='[Rx].[Discount]' />
+          <map key='[Dispensed Pharmacy]' value='[Rx].[Dispensed Pharmacy]' />
+          <map key='[Dispensed Region]' value='[Rx].[Dispensed Region]' />
+          <map key='[Dispensed State]' value='[Rx].[Dispensed State]' />
+          <map key='[Dispensed Zip Code]' value='[Rx].[Dispensed Zip Code]' />
+          <map key='[Drug Dosage Form]' value='[Rx].[Drug Dosage Form]' />
+          <map key='[Drug Name]' value='[Rx].[Drug Name]' />
+          <map key='[Drug Route]' value='[Rx].[Drug Route]' />
+          <map key='[Drug Supplier]' value='[Rx].[Drug Supplier]' />
+          <map key='[Market Segment]' value='[Rx].[Market Segment]' />
+          <map key='[Order ID (Returns)]' value='[Returns].[Order ID]' />
+          <map key='[Order ID]' value='[Rx].[Order ID]' />
+          <map key='[Product Base Margin]' value='[Rx].[Product Base Margin]' />
+          <map key='[Reason]' value='[Returns].[Reason]' />
+          <map key='[Rx Dollars]' value='[Rx].[Rx Dollars]' />
+          <map key='[Rx Profit]' value='[Rx].[Rx Profit]' />
+          <map key='[Rx Quantity]' value='[Rx].[Rx Quantity]' />
+          <map key='[Status]' value='[Returns].[Status]' />
+          <map key='[Unit Price]' value='[Rx].[Unit Price]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Order ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Order ID]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Order ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rx Quantity</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Rx Quantity]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Rx Quantity</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rx Dollars</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Rx Dollars]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Rx Dollars</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Discount</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Discount]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Discount</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Rx Profit</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Rx Profit]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Rx Profit</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Unit Price</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Unit Price]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Unit Price</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed Pharmacy</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Dispensed Pharmacy]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Dispensed Pharmacy</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed State</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Dispensed State]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Dispensed State</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed Zip Code</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Dispensed Zip Code]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Dispensed Zip Code</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed Region</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Dispensed Region]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Dispensed Region</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Market Segment</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Market Segment]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Market Segment</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Drug Supplier</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Drug Supplier]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Drug Supplier</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Drug Dosage Form</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Drug Dosage Form]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Drug Dosage Form</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Drug Name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Drug Name]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Drug Name</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Drug Route</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Drug Route]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Drug Route</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Product Base Margin</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Product Base Margin]</local-name>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias>Product Base Margin</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Rx]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:Q8400:no:A1:Q8400:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>2</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Order ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Order ID (Returns)]</local-name>
+            <parent-name>[Returns]</parent-name>
+            <remote-alias>Order ID</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Status</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Status]</local-name>
+            <parent-name>[Returns]</parent-name>
+            <remote-alias>Status</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Reason</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Reason]</local-name>
+            <parent-name>[Returns]</parent-name>
+            <remote-alias>Reason</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Returns]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:C573:no:A1:C573:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Net Sales filer' datatype='string' name='[Calculation_651051629349236736]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IIF([Reason]=&quot;Returned&quot;, &quot;Exclude returns&quot;, &quot;Include returns&quot;)' />
+      </column>
+      <column datatype='string' name='[Dispensed State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
+      <column datatype='integer' default-format='*00000' name='[Dispensed Zip Code]' role='dimension' semantic-role='[ZipCode].[Name]' type='ordinal' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column datatype='integer' name='[Order ID (Returns)]' role='dimension' type='ordinal' />
+      <column datatype='integer' name='[Order ID]' role='dimension' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.580952' measure-ordering='alphabetic' measure-percentage='0.364286' parameter-percentage='0.0547619' rowDisplayCount='1000000' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='Drug Distribution' inline='true' name='federated.0g7ccid1bib22v10r0c8n06e60vz' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Pharma Sales Data' name='excel-direct.0mbpsgt03l4gch1503f4z03xl1up'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='G:/Data Analytics/A Labs/4 Tableau/CS 2/Pharma Sales Data.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.0mbpsgt03l4gch1503f4z03xl1up' name='DrugDistribution' table='[DrugDistribution$]' type='table'>
+          <columns gridOrigin='A1:I8038:no:A1:I8038:0' header='yes' outcome='6'>
+            <column datatype='date' name='Date' ordinal='0' />
+            <column datatype='string' name='Dispensed Pharmacy' ordinal='1' />
+            <column datatype='string' name='Dispensed Region' ordinal='2' />
+            <column datatype='string' name='Distribution Method' ordinal='3' />
+            <column datatype='string' name='Order Priority' ordinal='4' />
+            <column datatype='date' name='Ship Date' ordinal='5' />
+            <column datatype='real' name='Distribution Costs' ordinal='6' />
+            <column datatype='integer' name='Number of Records' ordinal='7' />
+            <column datatype='integer' name='Order ID' ordinal='8' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed Pharmacy</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Dispensed Pharmacy]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Dispensed Pharmacy</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Dispensed Region</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Dispensed Region]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Dispensed Region</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Distribution Method</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Distribution Method]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Distribution Method</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Order Priority</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Order Priority]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Order Priority</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ship Date</remote-name>
+            <remote-type>7</remote-type>
+            <local-name>[Ship Date]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Ship Date</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>date</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Distribution Costs</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Distribution Costs]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Distribution Costs</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Number of Records</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Number of Records]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Number of Records</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Order ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Order ID]</local-name>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias>Order ID</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[DrugDistribution]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:I8038:no:A1:I8038:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec' />
+      <column datatype='integer' name='[Order ID]' role='dimension' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.620455' measure-ordering='alphabetic' measure-percentage='0.379545' rowDisplayCount='1000000' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+    <datasource caption='Sales Managers (Pharma Sales Data)' inline='true' name='federated.1en8jmv0h0adfy16al7si06p8o6j' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Pharma Sales Data' name='excel-direct.1vm8yc211qldv11ek4acc1wxck24'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='G:/Data Analytics/A Labs/4 Tableau/CS 2/Pharma Sales Data.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.1vm8yc211qldv11ek4acc1wxck24' name='Sales Managers' table='[&apos;Sales Managers$&apos;]' type='table'>
+          <columns gridOrigin='A1:B9:no:A1:B9:0' header='yes' outcome='6'>
+            <column datatype='string' name='Region' ordinal='0' />
+            <column datatype='string' name='Manager' ordinal='1' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>Region</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Region]</local-name>
+            <parent-name>[Sales Managers]</parent-name>
+            <remote-alias>Region</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Manager</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Manager]</local-name>
+            <parent-name>[Sales Managers]</parent-name>
+            <remote-alias>Manager</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RIN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Sales Managers]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:B9:no:A1:B9:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <layout dim-ordering='alphabetic' dim-percentage='0.525' measure-ordering='alphabetic' measure-percentage='0.475' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <datasource-relationships>
+    <datasource-dependencies datasource='federated.0g7ccid1bib22v10r0c8n06e60vz'>
+      <column datatype='integer' name='[Order ID]' role='dimension' type='ordinal' />
+      <column-instance column='[Order ID]' derivation='None' name='[none:Order ID:ok]' pivot='key' type='ordinal' />
+    </datasource-dependencies>
+    <datasource-dependencies datasource='federated.0xrfp400he6f3111x0rl60h5e91o'>
+      <column datatype='string' name='[Dispensed Region]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Order ID]' role='dimension' type='ordinal' />
+      <column-instance column='[Dispensed Region]' derivation='None' name='[none:Dispensed Region:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Order ID]' derivation='None' name='[none:Order ID:ok]' pivot='key' type='ordinal' />
+    </datasource-dependencies>
+    <datasource-dependencies datasource='federated.1en8jmv0h0adfy16al7si06p8o6j'>
+      <column datatype='string' name='[Region]' role='dimension' type='nominal' />
+      <column-instance column='[Region]' derivation='None' name='[none:Region:nk]' pivot='key' type='nominal' />
+    </datasource-dependencies>
+    <datasource-relationship source='federated.0xrfp400he6f3111x0rl60h5e91o' target='federated.0g7ccid1bib22v10r0c8n06e60vz'>
+      <column-mapping>
+        <map key='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Order ID:ok]' value='[federated.0g7ccid1bib22v10r0c8n06e60vz].[none:Order ID:ok]' />
+      </column-mapping>
+    </datasource-relationship>
+    <datasource-relationship source='federated.0xrfp400he6f3111x0rl60h5e91o' target='federated.1en8jmv0h0adfy16al7si06p8o6j'>
+      <column-mapping>
+        <map key='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Dispensed Region:nk]' value='[federated.1en8jmv0h0adfy16al7si06p8o6j].[none:Region:nk]' />
+      </column-mapping>
+    </datasource-relationship>
+  </datasource-relationships>
+  <worksheets>
+    <worksheet name='Q1'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Market share in top &lt;</run>
+            <run>[Parameters].[Product Base Margin Parameter]</run>
+            <run>&gt; drugs</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run>ALL SALES VALUES ARE NET (EXCLUDING RETURNS)</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Rx+Returns (Pharma Sales Data)' name='federated.0xrfp400he6f3111x0rl60h5e91o' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Top N' datatype='integer' name='[Product Base Margin Parameter]' param-domain-type='range' role='measure' type='quantitative' value='10'>
+              <calculation class='tableau' formula='10' />
+              <range max='1218' min='0' />
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.0xrfp400he6f3111x0rl60h5e91o'>
+            <column caption='Net Sales filer' datatype='string' name='[Calculation_651051629349236736]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IIF([Reason]=&quot;Returned&quot;, &quot;Exclude returns&quot;, &quot;Include returns&quot;)' />
+            </column>
+            <column datatype='string' name='[Drug Name]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Drug Supplier]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Reason]' role='dimension' type='nominal' />
+            <column datatype='real' name='[Rx Dollars]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_651051629349236736]' derivation='None' name='[none:Calculation_651051629349236736:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Drug Name]' derivation='None' name='[none:Drug Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Drug Supplier]' derivation='None' name='[none:Drug Supplier:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Rx Dollars]' derivation='Sum' name='[pcto:sum:Rx Dollars:qk:5]' pivot='key' type='quantitative'>
+              <table-calc ordering-type='CellInPane' type='PctTotal' />
+            </column-instance>
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Calculation_651051629349236736:nk]'>
+            <groupfilter function='member' level='[none:Calculation_651051629349236736:nk]' member='%null%' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]'>
+            <groupfilter count='[Parameters].[Product Base Margin Parameter]' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+              <groupfilter direction='DESC' expression='SUM([Rx Dollars])' function='order' user:ui-marker='order'>
+                <groupfilter function='level-members' level='[none:Drug Name:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;Orapred&quot;</bucket>
+              <bucket>&quot;Zofran Preservative Free&quot;</bucket>
+              <bucket>&quot;Oxacillin Sodium&quot;</bucket>
+              <bucket>&quot;Glucophage&quot;</bucket>
+              <bucket>&quot;Alli&quot;</bucket>
+              <bucket>&quot;Fibricor&quot;</bucket>
+              <bucket>&quot;Freamine 8.5\%&quot;</bucket>
+              <bucket>&quot;Genotropin Preservative Free&quot;</bucket>
+              <bucket>&quot;Feridex I.V.&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 5\%&quot;</bucket>
+              <bucket>&quot;Ozurdex&quot;</bucket>
+              <bucket>&quot;Phisohex&quot;</bucket>
+              <bucket>&quot;Naftin&quot;</bucket>
+              <bucket>&quot;Phenaphen W/ Codeine No. 3&quot;</bucket>
+              <bucket>&quot;Baci-Rx&quot;</bucket>
+              <bucket>&quot;Fazaclo Odt&quot;</bucket>
+              <bucket>&quot;Flagyl I.V. Rtu In Plastic Container&quot;</bucket>
+              <bucket>&quot;Apidra&quot;</bucket>
+              <bucket>&quot;Metrodin&quot;</bucket>
+              <bucket>&quot;Hepatasol 8\%&quot;</bucket>
+              <bucket>&quot;Lotrimin&quot;</bucket>
+              <bucket>&quot;Foscavir&quot;</bucket>
+              <bucket>&quot;Zirgan&quot;</bucket>
+              <bucket>&quot;Avinza&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 40Meq In Dextrose 5\% And Sodium Chloride 0.225\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Ogen 2.5&quot;</bucket>
+              <bucket>&quot;Ocl&quot;</bucket>
+              <bucket>&quot;Vasotec&quot;</bucket>
+              <bucket>&quot;Pamine Forte&quot;</bucket>
+              <bucket>&quot;Gencept 10/11-21&quot;</bucket>
+              <bucket>&quot;Vanos&quot;</bucket>
+              <bucket>&quot;Cetraxal&quot;</bucket>
+              <bucket>&quot;Ludiomil&quot;</bucket>
+              <bucket>&quot;Uroplus Ds&quot;</bucket>
+              <bucket>&quot;Veinamine 8\%&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 5,000 Units In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Oxy-Kesso-Tetra&quot;</bucket>
+              <bucket>&quot;E-Base&quot;</bucket>
+              <bucket>&quot;Normosol-R And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Velosef &apos;125&apos;&quot;</bucket>
+              <bucket>&quot;Cu-7&quot;</bucket>
+              <bucket>&quot;Orsythia&quot;</bucket>
+              <bucket>&quot;Serpasil-Esidrix \#2&quot;</bucket>
+              <bucket>&quot;Fludarabine Phosphate&quot;</bucket>
+              <bucket>&quot;Migergot&quot;</bucket>
+              <bucket>&quot;Fenofibrate (Micronized)&quot;</bucket>
+              <bucket>&quot;Pepcid Complete&quot;</bucket>
+              <bucket>&quot;Metronidazole&quot;</bucket>
+              <bucket>&quot;Elestrin&quot;</bucket>
+              <bucket>&quot;Vyvanse&quot;</bucket>
+              <bucket>&quot;Alcaine&quot;</bucket>
+              <bucket>&quot;Proklar&quot;</bucket>
+              <bucket>&quot;Amiloride Hydrochloride&quot;</bucket>
+              <bucket>&quot;Oleptro&quot;</bucket>
+              <bucket>&quot;Polytrim&quot;</bucket>
+              <bucket>&quot;Amantadine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Low-Ogestrel-28&quot;</bucket>
+              <bucket>&quot;Piperacillin And Tazobactam&quot;</bucket>
+              <bucket>&quot;Darbid&quot;</bucket>
+              <bucket>&quot;Naquival&quot;</bucket>
+              <bucket>&quot;Omnipaque 210&quot;</bucket>
+              <bucket>&quot;Proloprim&quot;</bucket>
+              <bucket>&quot;Galzin&quot;</bucket>
+              <bucket>&quot;Unipen&quot;</bucket>
+              <bucket>&quot;Angio-Conray&quot;</bucket>
+              <bucket>&quot;Cytosar-U&quot;</bucket>
+              <bucket>&quot;Vaprisol In 5\% Dextrose In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dexrazoxane Hydrochloride&quot;</bucket>
+              <bucket>&quot;Vivitrol&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 5\% W/ Electrolytes In Dextrose 25\% W/ Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Votrient&quot;</bucket>
+              <bucket>&quot;Vistaril&quot;</bucket>
+              <bucket>&quot;Thyroglobulin&quot;</bucket>
+              <bucket>&quot;Oxtriphylline&quot;</bucket>
+              <bucket>&quot;Perforomist&quot;</bucket>
+              <bucket>&quot;Pfizer-E&quot;</bucket>
+              <bucket>&quot;Cinobac&quot;</bucket>
+              <bucket>&quot;Flovent Hfa&quot;</bucket>
+              <bucket>&quot;Flolan&quot;</bucket>
+              <bucket>&quot;Emgel&quot;</bucket>
+              <bucket>&quot;Flurandrenolide&quot;</bucket>
+              <bucket>&quot;Zinc Bacitracin,Neomycin Sulfate,Polymyxin B Sulfate &amp; Hydrocortisone&quot;</bucket>
+              <bucket>&quot;Aquasol A&quot;</bucket>
+              <bucket>&quot;Aldoclor-150&quot;</bucket>
+              <bucket>&quot;Geodon&quot;</bucket>
+              <bucket>&quot;Loxitane&quot;</bucket>
+              <bucket>&quot;Ultram Er&quot;</bucket>
+              <bucket>&quot;Clinimix E 5/15 Sulfite-Free W/ Elect In Dextrose 15\% W/ Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Protopic&quot;</bucket>
+              <bucket>&quot;V-Cillin K&quot;</bucket>
+              <bucket>&quot;Minocycline Hydrochloride&quot;</bucket>
+              <bucket>&quot;Fondaparinux Sodium&quot;</bucket>
+              <bucket>&quot;Mirena&quot;</bucket>
+              <bucket>&quot;Adderall Xr 15&quot;</bucket>
+              <bucket>&quot;Sterane&quot;</bucket>
+              <bucket>&quot;Sodium Bicarbonate In Plastic Container&quot;</bucket>
+              <bucket>&quot;Pradaxa&quot;</bucket>
+              <bucket>&quot;Nortrel 0.5/35-28&quot;</bucket>
+              <bucket>&quot;Nalidixic Acid&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.075\% In Dextrose 5\% And Sodium Chloride 0.45\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Vicoprin&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Sodium Chloride 0.11\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Efidac 24 Chlorpheniramine Maleate&quot;</bucket>
+              <bucket>&quot;Alphazine&quot;</bucket>
+              <bucket>&quot;Stadol&quot;</bucket>
+              <bucket>&quot;Clinimix 2.75/5 Sulfite Free In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Colbenemid&quot;</bucket>
+              <bucket>&quot;Isoflurane&quot;</bucket>
+              <bucket>&quot;Zidovudine&quot;</bucket>
+              <bucket>&quot;Aminosyn 3.5\% W/ Dextrose 25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Intropin&quot;</bucket>
+              <bucket>&quot;Edetate Disodium&quot;</bucket>
+              <bucket>&quot;Clindagel&quot;</bucket>
+              <bucket>&quot;Isovue-300&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.11\% In Dextrose 5\% And Sodium Chloride 0.45\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Ondansetron Hydrochloride And Dextrose In Plastic Container&quot;</bucket>
+              <bucket>&quot;Serentil&quot;</bucket>
+              <bucket>&quot;Cipro Xr&quot;</bucket>
+              <bucket>&quot;Avalide&quot;</bucket>
+              <bucket>&quot;Freamine Ii 8.5\%&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 12,500 Units In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Urovist Meglumine Diu/Ct&quot;</bucket>
+              <bucket>&quot;Namenda Xr&quot;</bucket>
+              <bucket>&quot;Clinimix 5/20 Sulfite Free In Dextrose 20\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;U-Gencin&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 4.25\% In Dextrose 10\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Claritin Reditabs&quot;</bucket>
+              <bucket>&quot;Enablex&quot;</bucket>
+              <bucket>&quot;Stoxil&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 25,000 Units And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Lo-Trol&quot;</bucket>
+              <bucket>&quot;Prismasol Bk 4/2.5 In Plastic Container&quot;</bucket>
+              <bucket>&quot;Femcon Fe&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.15\% In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Parasal&quot;</bucket>
+              <bucket>&quot;Permax&quot;</bucket>
+              <bucket>&quot;Hetrazan&quot;</bucket>
+              <bucket>&quot;Priscoline&quot;</bucket>
+              <bucket>&quot;Amerscan Mdp Kit&quot;</bucket>
+              <bucket>&quot;Zavesca&quot;</bucket>
+              <bucket>&quot;Alinia&quot;</bucket>
+              <bucket>&quot;Dianeal Pd-1 W/ Dextrose 4.25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Phrenilin Forte&quot;</bucket>
+              <bucket>&quot;Ambodryl&quot;</bucket>
+              <bucket>&quot;Anhydron&quot;</bucket>
+              <bucket>&quot;Miconazole Nitrate Combination Pack&quot;</bucket>
+              <bucket>&quot;Atracurium Besylate Preservative Free&quot;</bucket>
+              <bucket>&quot;Nogenic Hc&quot;</bucket>
+              <bucket>&quot;Cefotaxime And Dextrose 3.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Clarinex D 24 Hour&quot;</bucket>
+              <bucket>&quot;Haloperidol Lactate&quot;</bucket>
+              <bucket>&quot;Cefzil&quot;</bucket>
+              <bucket>&quot;Nesacaine&quot;</bucket>
+              <bucket>&quot;Sulfacel-15&quot;</bucket>
+              <bucket>&quot;Rubramin Pc&quot;</bucket>
+              <bucket>&quot;Parlodel&quot;</bucket>
+              <bucket>&quot;Angiovist 370&quot;</bucket>
+              <bucket>&quot;Ocufen&quot;</bucket>
+              <bucket>&quot;Veriloid&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 10\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Lopid&quot;</bucket>
+              <bucket>&quot;Testosterone Cypionate-Estradiol Cypionate&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.037\% In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 10,000 Units In Dextrose 5\%&quot;</bucket>
+              <bucket>&quot;Fml Forte&quot;</bucket>
+              <bucket>&quot;Milrinone Lactate In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.075\% In Dextrose 10\% And Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Cor-Oticin&quot;</bucket>
+              <bucket>&quot;Sensipar&quot;</bucket>
+              <bucket>&quot;Subutex&quot;</bucket>
+              <bucket>&quot;Vigamox&quot;</bucket>
+              <bucket>&quot;Plan B&quot;</bucket>
+              <bucket>&quot;Ellence&quot;</bucket>
+              <bucket>&quot;Helicosol&quot;</bucket>
+              <bucket>&quot;Sandostatin&quot;</bucket>
+              <bucket>&quot;Citanest&quot;</bucket>
+              <bucket>&quot;Glumetza&quot;</bucket>
+              <bucket>&quot;Physiosol In Plastic Container&quot;</bucket>
+              <bucket>&quot;Anusol Hc&quot;</bucket>
+              <bucket>&quot;Losartan Potassium&quot;</bucket>
+              <bucket>&quot;Staphcillin&quot;</bucket>
+              <bucket>&quot;Norlestrin 21 1/50&quot;</bucket>
+              <bucket>&quot;Oreticyl 50&quot;</bucket>
+              <bucket>&quot;Cenestin&quot;</bucket>
+              <bucket>&quot;Potassium Chloride&quot;</bucket>
+              <bucket>&quot;Depo-Subq Provera 104&quot;</bucket>
+              <bucket>&quot;Cetirizine Hydrochloride And Pseudoephedrine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Frova&quot;</bucket>
+              <bucket>&quot;Inomax&quot;</bucket>
+              <bucket>&quot;Sinemet Cr&quot;</bucket>
+              <bucket>&quot;Androgel&quot;</bucket>
+              <bucket>&quot;Ritodrine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Pentetate Zinc Trisodium&quot;</bucket>
+              <bucket>&quot;Fluocinolone Acetonide&quot;</bucket>
+              <bucket>&quot;Orinase&quot;</bucket>
+              <bucket>&quot;Atarax&quot;</bucket>
+              <bucket>&quot;Klebcil&quot;</bucket>
+              <bucket>&quot;Adderall 5&quot;</bucket>
+              <bucket>&quot;Uticillin Vk&quot;</bucket>
+              <bucket>&quot;Lotrimin Ultra&quot;</bucket>
+              <bucket>&quot;Arava&quot;</bucket>
+              <bucket>&quot;Risperidone&quot;</bucket>
+              <bucket>&quot;Naphcon-A&quot;</bucket>
+              <bucket>&quot;Blephamide S.O.P.&quot;</bucket>
+              <bucket>&quot;Nph Iletin I (Beef-Pork)&quot;</bucket>
+              <bucket>&quot;Prostep&quot;</bucket>
+              <bucket>&quot;Choloxin&quot;</bucket>
+              <bucket>&quot;Balziva-21&quot;</bucket>
+              <bucket>&quot;Scabene&quot;</bucket>
+              <bucket>&quot;Osmitrol 5\% In Water&quot;</bucket>
+              <bucket>&quot;Cefizox&quot;</bucket>
+              <bucket>&quot;Videx&quot;</bucket>
+              <bucket>&quot;Hexalen&quot;</bucket>
+              <bucket>&quot;Primidone&quot;</bucket>
+              <bucket>&quot;Beepen-Vk&quot;</bucket>
+              <bucket>&quot;Plasma-Lyte 56 And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Clinimix 4.25/5 Sulfite Free In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Thioridazine Hydrochloride Intensol&quot;</bucket>
+              <bucket>&quot;Cholebrine&quot;</bucket>
+              <bucket>&quot;Benztropine Mesylate&quot;</bucket>
+              <bucket>&quot;Paremyd&quot;</bucket>
+              <bucket>&quot;Micronase&quot;</bucket>
+              <bucket>&quot;Paracort&quot;</bucket>
+              <bucket>&quot;Arduan&quot;</bucket>
+              <bucket>&quot;Altabax&quot;</bucket>
+              <bucket>&quot;Depakote Er&quot;</bucket>
+              <bucket>&quot;Doxychel&quot;</bucket>
+              <bucket>&quot;Adcirca&quot;</bucket>
+              <bucket>&quot;Aminosyn 8.5\% W/ Electrolytes&quot;</bucket>
+              <bucket>&quot;Pathilon&quot;</bucket>
+              <bucket>&quot;Novamine 8.5\%&quot;</bucket>
+              <bucket>&quot;Safyral&quot;</bucket>
+              <bucket>&quot;Delflex W/ Dextrose 2.5\% Low Magnesium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 20Meq In Dextrose 5\% And Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Norvasc&quot;</bucket>
+              <bucket>&quot;Sonazine&quot;</bucket>
+              <bucket>&quot;Demulen 1/50-21&quot;</bucket>
+              <bucket>&quot;Cetrotide&quot;</bucket>
+              <bucket>&quot;Nph Insulin&quot;</bucket>
+              <bucket>&quot;Rocaltrol&quot;</bucket>
+              <bucket>&quot;Mepergan&quot;</bucket>
+              <bucket>&quot;Kenalog-10&quot;</bucket>
+              <bucket>&quot;Codeine, Aspirin, Apap Formula No. 2&quot;</bucket>
+              <bucket>&quot;Clopra-\&quot;Yellow\&quot;&quot;</bucket>
+              <bucket>&quot;Betoptic&quot;</bucket>
+              <bucket>&quot;Deferoxamine Mesylate&quot;</bucket>
+              <bucket>&quot;Sevoflurane&quot;</bucket>
+              <bucket>&quot;Fludara&quot;</bucket>
+              <bucket>&quot;Briellyn&quot;</bucket>
+              <bucket>&quot;Antepar&quot;</bucket>
+              <bucket>&quot;Kantrex&quot;</bucket>
+              <bucket>&quot;Tavist-D&quot;</bucket>
+              <bucket>&quot;Fluidil&quot;</bucket>
+              <bucket>&quot;Foradil Certihaler&quot;</bucket>
+              <bucket>&quot;Phenelzine Sulfate&quot;</bucket>
+              <bucket>&quot;Polycillin&quot;</bucket>
+              <bucket>&quot;Repronex&quot;</bucket>
+              <bucket>&quot;Ammonium Chloride 0.9\% In Normal Saline&quot;</bucket>
+              <bucket>&quot;Aminohippurate Sodium&quot;</bucket>
+              <bucket>&quot;Embeline&quot;</bucket>
+              <bucket>&quot;Diphenhydramine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Voltaren-Xr&quot;</bucket>
+              <bucket>&quot;Ammonul&quot;</bucket>
+              <bucket>&quot;Panheprin&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.11\% In Dextrose 10\% And Sodium Chloride 0.2\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Valisone&quot;</bucket>
+              <bucket>&quot;Cephalothin Sodium W/ Dextrose In Plastic Container&quot;</bucket>
+              <bucket>&quot;Alphacaine Hydrochloride W/ Epinephrine&quot;</bucket>
+              <bucket>&quot;Betoptic Pilo&quot;</bucket>
+              <bucket>&quot;Aldoril D50&quot;</bucket>
+              <bucket>&quot;Primacor&quot;</bucket>
+              <bucket>&quot;Dextrose 60\%&quot;</bucket>
+              <bucket>&quot;Crestor&quot;</bucket>
+              <bucket>&quot;Amerge&quot;</bucket>
+              <bucket>&quot;Dextrose 40\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Diclofenac Sodium&quot;</bucket>
+              <bucket>&quot;Hydrocodone Bitartrate And Acetaminophen&quot;</bucket>
+              <bucket>&quot;Technescan Hida&quot;</bucket>
+              <bucket>&quot;Entocort Ec&quot;</bucket>
+              <bucket>&quot;Chronulac&quot;</bucket>
+              <bucket>&quot;Vecuronium Bromide&quot;</bucket>
+              <bucket>&quot;Asbron&quot;</bucket>
+              <bucket>&quot;Pravachol&quot;</bucket>
+              <bucket>&quot;Mannitol 10\%&quot;</bucket>
+              <bucket>&quot;Dialyte Lm/ Dextrose 1.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Forteo&quot;</bucket>
+              <bucket>&quot;Atrovent Hfa&quot;</bucket>
+              <bucket>&quot;Halcion&quot;</bucket>
+              <bucket>&quot;Allay&quot;</bucket>
+              <bucket>&quot;Dextrose 10\% And Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Nitrofurazone&quot;</bucket>
+              <bucket>&quot;Nulytely-Flavored&quot;</bucket>
+              <bucket>&quot;Prednisone Intensol&quot;</bucket>
+              <bucket>&quot;Allopurinol Sodium&quot;</bucket>
+              <bucket>&quot;Cortef&quot;</bucket>
+              <bucket>&quot;Tropicacyl&quot;</bucket>
+              <bucket>&quot;Proferdex&quot;</bucket>
+              <bucket>&quot;Eryc 125&quot;</bucket>
+              <bucket>&quot;Flaxedil&quot;</bucket>
+              <bucket>&quot;Junior Strength Advil&quot;</bucket>
+              <bucket>&quot;Amipaque&quot;</bucket>
+              <bucket>&quot;Bromatapp&quot;</bucket>
+              <bucket>&quot;Dicumarol&quot;</bucket>
+              <bucket>&quot;Phenergan Vc&quot;</bucket>
+              <bucket>&quot;Aplenzin&quot;</bucket>
+              <bucket>&quot;Cupric Chloride In Plastic Container&quot;</bucket>
+              <bucket>&quot;Visine-A&quot;</bucket>
+              <bucket>&quot;Tiazac&quot;</bucket>
+              <bucket>&quot;Sprx-105&quot;</bucket>
+              <bucket>&quot;Diutensen-R&quot;</bucket>
+              <bucket>&quot;Probenecid&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.33\% And Potassium Chloride 0.22\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Augmentin &apos;500&apos;&quot;</bucket>
+              <bucket>&quot;Azactam In Plastic Container&quot;</bucket>
+              <bucket>&quot;Domeboro&quot;</bucket>
+              <bucket>&quot;Noroxin&quot;</bucket>
+              <bucket>&quot;Sodium Lactate In Plastic Container&quot;</bucket>
+              <bucket>&quot;Docetaxel&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.15\% In Dextrose 10\% And Sodium Chloride 0.2\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Aktob&quot;</bucket>
+              <bucket>&quot;Rimifon&quot;</bucket>
+              <bucket>&quot;Ceradon&quot;</bucket>
+              <bucket>&quot;Betamethasone Acetate And Betamethasone Sodium Phosphate&quot;</bucket>
+              <bucket>&quot;Desloratadine And Pseudoephedrine Sulfate 24 Hour&quot;</bucket>
+              <bucket>&quot;Skelid&quot;</bucket>
+              <bucket>&quot;Alora&quot;</bucket>
+              <bucket>&quot;Optimine&quot;</bucket>
+              <bucket>&quot;Aminosyn-Rf 5.2\%&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.15\% In Dextrose 5\% And Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Beyaz&quot;</bucket>
+              <bucket>&quot;Diflunisal&quot;</bucket>
+              <bucket>&quot;Estrace&quot;</bucket>
+              <bucket>&quot;Chenodiol&quot;</bucket>
+              <bucket>&quot;Constulose&quot;</bucket>
+              <bucket>&quot;Technetium Tc 99M Hsa&quot;</bucket>
+              <bucket>&quot;Aminophylline&quot;</bucket>
+              <bucket>&quot;Sectral&quot;</bucket>
+              <bucket>&quot;Fulvicin P/G 330&quot;</bucket>
+              <bucket>&quot;Vimovo&quot;</bucket>
+              <bucket>&quot;Enalaprilat&quot;</bucket>
+              <bucket>&quot;Bretylium Tosylate&quot;</bucket>
+              <bucket>&quot;Anectine&quot;</bucket>
+              <bucket>&quot;Diflucan In Sodium Chloride 0.9\%&quot;</bucket>
+              <bucket>&quot;Terazosin Hydrochloride&quot;</bucket>
+              <bucket>&quot;Dianeal Low Calcium W/ Dextrose 2.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Eulexin&quot;</bucket>
+              <bucket>&quot;Theophylline 0.32\% And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Antagonate&quot;</bucket>
+              <bucket>&quot;Pletal&quot;</bucket>
+              <bucket>&quot;Anthelios 20&quot;</bucket>
+              <bucket>&quot;Hydro-Ride&quot;</bucket>
+              <bucket>&quot;Benoquin&quot;</bucket>
+              <bucket>&quot;Precose&quot;</bucket>
+              <bucket>&quot;Dextrose 2.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Isopto Cetapred&quot;</bucket>
+              <bucket>&quot;Hydralazine Hydrochloride-Hydrochlorothiazide-Reserpine&quot;</bucket>
+              <bucket>&quot;Lomotil&quot;</bucket>
+              <bucket>&quot;Arthrotec&quot;</bucket>
+              <bucket>&quot;Memantine&quot;</bucket>
+              <bucket>&quot;Trovan Preservative Free&quot;</bucket>
+              <bucket>&quot;Ribavirin&quot;</bucket>
+              <bucket>&quot;Levocarnitine&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.45\% And Potassium Chloride 20Meq (K) In Plastic Container&quot;</bucket>
+              <bucket>&quot;Magnesium Sulfate&quot;</bucket>
+              <bucket>&quot;Flomax&quot;</bucket>
+              <bucket>&quot;Thallous Chloride Tl 201&quot;</bucket>
+              <bucket>&quot;Peridex&quot;</bucket>
+              <bucket>&quot;Polyethylene Glycol 3350 And Electrolytes&quot;</bucket>
+              <bucket>&quot;Aminosyn-Hbc 7\%&quot;</bucket>
+              <bucket>&quot;Prismasol Bgk 2/0 In Plastic Container&quot;</bucket>
+              <bucket>&quot;Nitro-Dur&quot;</bucket>
+              <bucket>&quot;Axid Ar&quot;</bucket>
+              <bucket>&quot;Ismelin&quot;</bucket>
+              <bucket>&quot;Propoxyphene Compound-65&quot;</bucket>
+              <bucket>&quot;Clindamycin Phosphate In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Bronkaid Mist&quot;</bucket>
+              <bucket>&quot;Avandamet&quot;</bucket>
+              <bucket>&quot;Vertavis&quot;</bucket>
+              <bucket>&quot;Metoprolol Succinate&quot;</bucket>
+              <bucket>&quot;Anafranil&quot;</bucket>
+              <bucket>&quot;Increlex&quot;</bucket>
+              <bucket>&quot;Onglyza&quot;</bucket>
+              <bucket>&quot;Clozaril&quot;</bucket>
+              <bucket>&quot;Betamethasone Dipropionate&quot;</bucket>
+              <bucket>&quot;Inderide La 160/50&quot;</bucket>
+              <bucket>&quot;Ketozole&quot;</bucket>
+              <bucket>&quot;Reglan&quot;</bucket>
+              <bucket>&quot;Indium In-111 Oxyquinoline&quot;</bucket>
+              <bucket>&quot;Amicar&quot;</bucket>
+              <bucket>&quot;Trizivir&quot;</bucket>
+              <bucket>&quot;Inflamase Forte&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 7\% W/ Electrolytes&quot;</bucket>
+              <bucket>&quot;Inpersol-Zm W/ Dextrose 4.25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Theolair-Sr&quot;</bucket>
+              <bucket>&quot;Norpace&quot;</bucket>
+              <bucket>&quot;Azmacort&quot;</bucket>
+              <bucket>&quot;Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dimetapp&quot;</bucket>
+              <bucket>&quot;Azopt&quot;</bucket>
+              <bucket>&quot;Xalkori&quot;</bucket>
+              <bucket>&quot;Anthelios 40&quot;</bucket>
+              <bucket>&quot;Novolog Mix 70/30&quot;</bucket>
+              <bucket>&quot;Ifosfamide&quot;</bucket>
+              <bucket>&quot;Prevacid 24 Hr&quot;</bucket>
+              <bucket>&quot;Humulin N&quot;</bucket>
+              <bucket>&quot;Sorbitrate&quot;</bucket>
+              <bucket>&quot;Edurant&quot;</bucket>
+              <bucket>&quot;Angeliq&quot;</bucket>
+              <bucket>&quot;Provocholine&quot;</bucket>
+              <bucket>&quot;Dextrose 3.3\% And Sodium Chloride 0.3\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Clorpres&quot;</bucket>
+              <bucket>&quot;Elixicon&quot;</bucket>
+              <bucket>&quot;Maprotiline Hydrochloride&quot;</bucket>
+              <bucket>&quot;Vagifem&quot;</bucket>
+              <bucket>&quot;Aerolate Iii&quot;</bucket>
+              <bucket>&quot;Camila&quot;</bucket>
+              <bucket>&quot;Ethmozine&quot;</bucket>
+              <bucket>&quot;Rogaine (For Women)&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 3.5\% In Dextrose 25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Protostat&quot;</bucket>
+              <bucket>&quot;Ak-Fluor 25\%&quot;</bucket>
+              <bucket>&quot;Infuvite Pediatric (Pharmacy Bulk Package)&quot;</bucket>
+              <bucket>&quot;Clinimix E 2.75/5 Sulfite-Free W/ Elect In Dextrose 5\% W/ Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dificid&quot;</bucket>
+              <bucket>&quot;Terramycin W/ Polymyxin B Sulfate&quot;</bucket>
+              <bucket>&quot;Metadate Er&quot;</bucket>
+              <bucket>&quot;Tylox&quot;</bucket>
+              <bucket>&quot;Doriden&quot;</bucket>
+              <bucket>&quot;Ryzolt&quot;</bucket>
+              <bucket>&quot;Dermacort&quot;</bucket>
+              <bucket>&quot;Ketalar&quot;</bucket>
+              <bucket>&quot;Dtic-Dome&quot;</bucket>
+              <bucket>&quot;Lorcet-Hd&quot;</bucket>
+              <bucket>&quot;Firazyr&quot;</bucket>
+              <bucket>&quot;Soyacal 10\%&quot;</bucket>
+              <bucket>&quot;Microgestin 1/20&quot;</bucket>
+              <bucket>&quot;Benazepril Hydrochloride&quot;</bucket>
+              <bucket>&quot;Norethindrone And Ethinyl Estradiol And Ferrous Fumarate&quot;</bucket>
+              <bucket>&quot;Gleevec&quot;</bucket>
+              <bucket>&quot;Cytoxan&quot;</bucket>
+              <bucket>&quot;Kombiglyze Xr&quot;</bucket>
+              <bucket>&quot;Benicar Hct&quot;</bucket>
+              <bucket>&quot;Doxercalciferol&quot;</bucket>
+              <bucket>&quot;Benadryl Preservative Free&quot;</bucket>
+              <bucket>&quot;Levalbuterol Hydrochloride&quot;</bucket>
+              <bucket>&quot;Actahist&quot;</bucket>
+              <bucket>&quot;Cyclophosphamide&quot;</bucket>
+              <bucket>&quot;Solaraze&quot;</bucket>
+              <bucket>&quot;Drisdol&quot;</bucket>
+              <bucket>&quot;Rela&quot;</bucket>
+              <bucket>&quot;Bacitracin Zinc-Neomycin Sulfate-Polymyxin B Sulfate&quot;</bucket>
+              <bucket>&quot;Ferrlecit&quot;</bucket>
+              <bucket>&quot;Amrix&quot;</bucket>
+              <bucket>&quot;Hydrogenated Ergot Alkaloids&quot;</bucket>
+              <bucket>&quot;Catapres-Tts-2&quot;</bucket>
+              <bucket>&quot;Theobid Jr.&quot;</bucket>
+              <bucket>&quot;Neomycin Sulfate, Polymyxin B Sulfate &amp; Hydrocortisone&quot;</bucket>
+              <bucket>&quot;Butalibital, Acetaminophen And Caffeine&quot;</bucket>
+              <bucket>&quot;Velosulin Br&quot;</bucket>
+              <bucket>&quot;Fentanyl-75&quot;</bucket>
+              <bucket>&quot;Isolyte R In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Proventil&quot;</bucket>
+              <bucket>&quot;Methylergonovine Maleate&quot;</bucket>
+              <bucket>&quot;Aerolate Sr&quot;</bucket>
+              <bucket>&quot;Menest&quot;</bucket>
+              <bucket>&quot;Amoxicillin&quot;</bucket>
+              <bucket>&quot;Propranolol Hydrochloride Intensol&quot;</bucket>
+              <bucket>&quot;Fluocinonide Emulsified Base&quot;</bucket>
+              <bucket>&quot;Anthelios Sx&quot;</bucket>
+              <bucket>&quot;Matulane&quot;</bucket>
+              <bucket>&quot;Thiothixene&quot;</bucket>
+              <bucket>&quot;Esimil&quot;</bucket>
+              <bucket>&quot;Delsym&quot;</bucket>
+              <bucket>&quot;Diphenoxylate Hydrochloride W/ Atropine Sulfate&quot;</bucket>
+              <bucket>&quot;Cerumenex&quot;</bucket>
+              <bucket>&quot;Aralen Hydrochloride&quot;</bucket>
+              <bucket>&quot;Mpi Stannous Diphosphonate&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.15\% In Dextrose 3.3\% And Sodium Chloride 0.3\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Seasonique&quot;</bucket>
+              <bucket>&quot;Anspor&quot;</bucket>
+              <bucket>&quot;Winstrol&quot;</bucket>
+              <bucket>&quot;Anexsia 5/325&quot;</bucket>
+              <bucket>&quot;Gastrocrom&quot;</bucket>
+              <bucket>&quot;Meprobamate&quot;</bucket>
+              <bucket>&quot;Zovia 1/50E-21&quot;</bucket>
+              <bucket>&quot;Gastromark&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Alimta&quot;</bucket>
+              <bucket>&quot;Combunox&quot;</bucket>
+              <bucket>&quot;Atropen&quot;</bucket>
+              <bucket>&quot;Ethchlorvynol&quot;</bucket>
+              <bucket>&quot;Kelnor&quot;</bucket>
+              <bucket>&quot;Miacalcin&quot;</bucket>
+              <bucket>&quot;Baciguent&quot;</bucket>
+              <bucket>&quot;Indo-Lemmon&quot;</bucket>
+              <bucket>&quot;Corzide&quot;</bucket>
+              <bucket>&quot;Etrafon-A&quot;</bucket>
+              <bucket>&quot;Kwell&quot;</bucket>
+              <bucket>&quot;Meti-Derm&quot;</bucket>
+              <bucket>&quot;Daypro Alta&quot;</bucket>
+              <bucket>&quot;Predamide&quot;</bucket>
+              <bucket>&quot;Ampicillin And Sulbactam&quot;</bucket>
+              <bucket>&quot;Liquamar&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.2\% And Potassium Chloride 40Meq&quot;</bucket>
+              <bucket>&quot;An-Sulfur Colloid&quot;</bucket>
+              <bucket>&quot;Loestrin 21 1/20&quot;</bucket>
+              <bucket>&quot;Chloroptic&quot;</bucket>
+              <bucket>&quot;Methergine&quot;</bucket>
+              <bucket>&quot;Dextrose 25\%&quot;</bucket>
+              <bucket>&quot;Xylocaine&quot;</bucket>
+              <bucket>&quot;Aminess 5.2\% Essential Amino Acids W/ Histadine&quot;</bucket>
+              <bucket>&quot;Myidyl&quot;</bucket>
+              <bucket>&quot;Cotrim&quot;</bucket>
+              <bucket>&quot;Ibuprohm&quot;</bucket>
+              <bucket>&quot;Promethazine Vc W/ Codeine&quot;</bucket>
+              <bucket>&quot;Etoposide&quot;</bucket>
+              <bucket>&quot;Bactrim Ds&quot;</bucket>
+              <bucket>&quot;Aminocaproic Acid&quot;</bucket>
+              <bucket>&quot;Product Name&quot;</bucket>
+              <bucket>&quot;Clinimix E 4.25/20 Sulfite-Free W/ Elect In Dextrose 20\% W/ Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Citanest Plain Dental&quot;</bucket>
+              <bucket>&quot;Harmonyl&quot;</bucket>
+              <bucket>&quot;Butabarbital Sodium&quot;</bucket>
+              <bucket>&quot;Alfenta&quot;</bucket>
+              <bucket>&quot;Isolyte S Ph 7.4 In Plastic Container&quot;</bucket>
+              <bucket>&quot;Lygen&quot;</bucket>
+              <bucket>&quot;Spectrobid&quot;</bucket>
+              <bucket>&quot;Acephen&quot;</bucket>
+              <bucket>&quot;Eurax&quot;</bucket>
+              <bucket>&quot;Clomipramine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Acth&quot;</bucket>
+              <bucket>&quot;Virac Rex&quot;</bucket>
+              <bucket>&quot;Methotrexate Sodium&quot;</bucket>
+              <bucket>&quot;Elestat&quot;</bucket>
+              <bucket>&quot;Medrol Acetate&quot;</bucket>
+              <bucket>&quot;Paser&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Electrolyte No 75 In Plastic Container&quot;</bucket>
+              <bucket>&quot;Suprenza&quot;</bucket>
+              <bucket>&quot;Neo-Rx&quot;</bucket>
+              <bucket>&quot;Nandrolone Phenpropionate&quot;</bucket>
+              <bucket>&quot;Folicet&quot;</bucket>
+              <bucket>&quot;Children&apos;S Allegra Allergy&quot;</bucket>
+              <bucket>&quot;Butalan&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Sodium Chloride 0.45\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Anoquan&quot;</bucket>
+              <bucket>&quot;Disulfiram&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Sodium Chloride 0.3\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Phentermine Resin Complex&quot;</bucket>
+              <bucket>&quot;Emla&quot;</bucket>
+              <bucket>&quot;Bromfenac Sodium&quot;</bucket>
+              <bucket>&quot;Propafenone Hydrochloride&quot;</bucket>
+              <bucket>&quot;Dopamine Hydrochloride In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Calderol&quot;</bucket>
+              <bucket>&quot;Loraz&quot;</bucket>
+              <bucket>&quot;Mithracin&quot;</bucket>
+              <bucket>&quot;Loratadine Redidose&quot;</bucket>
+              <bucket>&quot;Adderall 10&quot;</bucket>
+              <bucket>&quot;Exidine&quot;</bucket>
+              <bucket>&quot;Proair Hfa&quot;</bucket>
+              <bucket>&quot;Pbz&quot;</bucket>
+              <bucket>&quot;Ilotycin&quot;</bucket>
+              <bucket>&quot;Bayer Extra Strength Aspirin For Migraine Pain&quot;</bucket>
+              <bucket>&quot;Vermidol&quot;</bucket>
+              <bucket>&quot;Theophyl-Sr&quot;</bucket>
+              <bucket>&quot;Inulin And Sodium Chloride&quot;</bucket>
+              <bucket>&quot;Conray&quot;</bucket>
+              <bucket>&quot;Peg-Lyte&quot;</bucket>
+              <bucket>&quot;Edarbi&quot;</bucket>
+              <bucket>&quot;Prevpac&quot;</bucket>
+              <bucket>&quot;Tenuate Dospan&quot;</bucket>
+              <bucket>&quot;Technetium Tc-99M Mebrofenin&quot;</bucket>
+              <bucket>&quot;Zoloft&quot;</bucket>
+              <bucket>&quot;Coreg&quot;</bucket>
+              <bucket>&quot;Excedrin (Migraine)&quot;</bucket>
+              <bucket>&quot;Dilaudid&quot;</bucket>
+              <bucket>&quot;Bancap&quot;</bucket>
+              <bucket>&quot;Pentids &apos;800&apos;&quot;</bucket>
+              <bucket>&quot;Proquin Xr&quot;</bucket>
+              <bucket>&quot;Ortho-Novum 10/11-21&quot;</bucket>
+              <bucket>&quot;Vinblastine Sulfate&quot;</bucket>
+              <bucket>&quot;Raxar&quot;</bucket>
+              <bucket>&quot;Neurolite&quot;</bucket>
+              <bucket>&quot;Exsel&quot;</bucket>
+              <bucket>&quot;Lanoxin Pediatric&quot;</bucket>
+              <bucket>&quot;Cardizem Sr&quot;</bucket>
+              <bucket>&quot;Bio-Tropin&quot;</bucket>
+              <bucket>&quot;Temozolomide&quot;</bucket>
+              <bucket>&quot;Lescol&quot;</bucket>
+              <bucket>&quot;Prometa&quot;</bucket>
+              <bucket>&quot;Metoclopramide Intensol&quot;</bucket>
+              <bucket>&quot;Pyocidin&quot;</bucket>
+              <bucket>&quot;Clobetasol Propionate&quot;</bucket>
+              <bucket>&quot;Penicillin&quot;</bucket>
+              <bucket>&quot;Tylenol (Geltab)&quot;</bucket>
+              <bucket>&quot;Sporanox&quot;</bucket>
+              <bucket>&quot;Erythromycin Stearate&quot;</bucket>
+              <bucket>&quot;Ceenu&quot;</bucket>
+              <bucket>&quot;Carbocaine&quot;</bucket>
+              <bucket>&quot;Dorzolamide Hydrochloride And Timolol Maleate&quot;</bucket>
+              <bucket>&quot;Etodolac&quot;</bucket>
+              <bucket>&quot;Vincrex&quot;</bucket>
+              <bucket>&quot;Tirosint&quot;</bucket>
+              <bucket>&quot;Actifed W/ Codeine&quot;</bucket>
+              <bucket>&quot;Keppra&quot;</bucket>
+              <bucket>&quot;Mexate-Aq Preserved&quot;</bucket>
+              <bucket>&quot;Aristocort A&quot;</bucket>
+              <bucket>&quot;Bancap Hc&quot;</bucket>
+              <bucket>&quot;Estradiol Cypionate&quot;</bucket>
+              <bucket>&quot;Diovan Hct&quot;</bucket>
+              <bucket>&quot;Chlorpropamide&quot;</bucket>
+              <bucket>&quot;Measurin&quot;</bucket>
+              <bucket>&quot;Enduronyl&quot;</bucket>
+              <bucket>&quot;Meclodium&quot;</bucket>
+              <bucket>&quot;Mymethazine Fortis&quot;</bucket>
+              <bucket>&quot;Robaxin&quot;</bucket>
+              <bucket>&quot;Drize&quot;</bucket>
+              <bucket>&quot;Duragesic-75&quot;</bucket>
+              <bucket>&quot;Nicorette (Mint)&quot;</bucket>
+              <bucket>&quot;Chymex&quot;</bucket>
+              <bucket>&quot;Cam-Metrazine&quot;</bucket>
+              <bucket>&quot;Multaq&quot;</bucket>
+              <bucket>&quot;Prefrin-A&quot;</bucket>
+              <bucket>&quot;Hypaque Sodium 20\%&quot;</bucket>
+              <bucket>&quot;Probampacin&quot;</bucket>
+              <bucket>&quot;Advil Cold And Sinus&quot;</bucket>
+              <bucket>&quot;Retin-A Micro&quot;</bucket>
+              <bucket>&quot;Humatin&quot;</bucket>
+              <bucket>&quot;Methylprednisolone&quot;</bucket>
+              <bucket>&quot;Fexofenadine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 10Meq In Dextrose 5\% And Sodium Chloride 0.45\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Norethin 1/50M-28&quot;</bucket>
+              <bucket>&quot;Isoetharine Hydrochloride S/F&quot;</bucket>
+              <bucket>&quot;Abstral&quot;</bucket>
+              <bucket>&quot;Zonalon&quot;</bucket>
+              <bucket>&quot;Ancef In Plastic Container&quot;</bucket>
+              <bucket>&quot;Gynorest&quot;</bucket>
+              <bucket>&quot;Nexium&quot;</bucket>
+              <bucket>&quot;Estropipate&quot;</bucket>
+              <bucket>&quot;Mucinex D&quot;</bucket>
+              <bucket>&quot;Imodium A-D Ez Chews&quot;</bucket>
+              <bucket>&quot;Brevital Sodium&quot;</bucket>
+              <bucket>&quot;Epivir-Hbv&quot;</bucket>
+              <bucket>&quot;Dextrose 7.7\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Procapan&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% In Lactated Ringer&apos;S In Plastic Container&quot;</bucket>
+              <bucket>&quot;Floropryl&quot;</bucket>
+              <bucket>&quot;Riomet&quot;</bucket>
+              <bucket>&quot;Pur-Wash&quot;</bucket>
+              <bucket>&quot;Norinyl 1+35 21-Day&quot;</bucket>
+              <bucket>&quot;Laryngotracheal Anesthesia Kit&quot;</bucket>
+              <bucket>&quot;Actidil&quot;</bucket>
+              <bucket>&quot;Fuzeon&quot;</bucket>
+              <bucket>&quot;Atropine And Demerol&quot;</bucket>
+              <bucket>&quot;Tab-Profen&quot;</bucket>
+              <bucket>&quot;Soma Compound&quot;</bucket>
+              <bucket>&quot;Q-Pam&quot;</bucket>
+              <bucket>&quot;Buprenorphine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Talacen&quot;</bucket>
+              <bucket>&quot;Gynazole-1&quot;</bucket>
+              <bucket>&quot;Adriamycin Rdf&quot;</bucket>
+              <bucket>&quot;Ziac&quot;</bucket>
+              <bucket>&quot;Bicillin&quot;</bucket>
+              <bucket>&quot;Aureomycin&quot;</bucket>
+              <bucket>&quot;Norditropin&quot;</bucket>
+              <bucket>&quot;Methotrexate Sodium Preservative Free&quot;</bucket>
+              <bucket>&quot;Sulfair Forte&quot;</bucket>
+              <bucket>&quot;Mephyton&quot;</bucket>
+              <bucket>&quot;Metatensin \#4&quot;</bucket>
+              <bucket>&quot;Neo-Hydeltrasol&quot;</bucket>
+              <bucket>&quot;Bronkodyl&quot;</bucket>
+              <bucket>&quot;Halflytely&quot;</bucket>
+              <bucket>&quot;Synalgos-Dc-A&quot;</bucket>
+              <bucket>&quot;Naturetin-2.5&quot;</bucket>
+              <bucket>&quot;Histamine Phosphate&quot;</bucket>
+              <bucket>&quot;Demadex&quot;</bucket>
+              <bucket>&quot;Osmitrol 15\% In Water&quot;</bucket>
+              <bucket>&quot;Theophylline And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Rau-Sed&quot;</bucket>
+              <bucket>&quot;Diazoxide&quot;</bucket>
+              <bucket>&quot;Albalon&quot;</bucket>
+              <bucket>&quot;Glyburide&quot;</bucket>
+              <bucket>&quot;Euthroid-1&quot;</bucket>
+              <bucket>&quot;Maxibolin&quot;</bucket>
+              <bucket>&quot;Daunoxome&quot;</bucket>
+              <bucket>&quot;Accuneb&quot;</bucket>
+              <bucket>&quot;Minoxidil (For Women)&quot;</bucket>
+              <bucket>&quot;Bupivacaine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Hydramine&quot;</bucket>
+              <bucket>&quot;Deapril-St&quot;</bucket>
+              <bucket>&quot;Cladribine&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.2\% And Potassium Chloride 0.15\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Deltalin&quot;</bucket>
+              <bucket>&quot;Cimetidine Hydrochloride In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Hectorol&quot;</bucket>
+              <bucket>&quot;Modicon 21&quot;</bucket>
+              <bucket>&quot;Gyne-Lotrimin 3&quot;</bucket>
+              <bucket>&quot;Lialda&quot;</bucket>
+              <bucket>&quot;Chlorotrianisene&quot;</bucket>
+              <bucket>&quot;Tussicaps&quot;</bucket>
+              <bucket>&quot;Ifex&quot;</bucket>
+              <bucket>&quot;Bicillin L-A&quot;</bucket>
+              <bucket>&quot;Cyanocobalamin&quot;</bucket>
+              <bucket>&quot;Lidopen&quot;</bucket>
+              <bucket>&quot;Orudis&quot;</bucket>
+              <bucket>&quot;Hyzaar&quot;</bucket>
+              <bucket>&quot;Asendin&quot;</bucket>
+              <bucket>&quot;Hy-Phen&quot;</bucket>
+              <bucket>&quot;Evans Blue&quot;</bucket>
+              <bucket>&quot;Humulin U&quot;</bucket>
+              <bucket>&quot;Nebcin&quot;</bucket>
+              <bucket>&quot;Duraprep&quot;</bucket>
+              <bucket>&quot;Ibuprin&quot;</bucket>
+              <bucket>&quot;Borofair&quot;</bucket>
+              <bucket>&quot;Rimactane&quot;</bucket>
+              <bucket>&quot;Mazanor&quot;</bucket>
+              <bucket>&quot;Humegon&quot;</bucket>
+              <bucket>&quot;Butalbital, Acetaminophen And Caffeine&quot;</bucket>
+              <bucket>&quot;Alphacaine&quot;</bucket>
+              <bucket>&quot;Carisoprodol&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 0.22\% In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Hy-Pam \&quot;25\&quot;&quot;</bucket>
+              <bucket>&quot;Actiq&quot;</bucket>
+              <bucket>&quot;Tora&quot;</bucket>
+              <bucket>&quot;Bucet&quot;</bucket>
+              <bucket>&quot;Hydrocortisone And Acetic Acid&quot;</bucket>
+              <bucket>&quot;Oxycodone And Aspirin&quot;</bucket>
+              <bucket>&quot;Nasalcrom&quot;</bucket>
+              <bucket>&quot;Extraneal&quot;</bucket>
+              <bucket>&quot;Monistat 7 Combination Pack&quot;</bucket>
+              <bucket>&quot;Rifadin&quot;</bucket>
+              <bucket>&quot;Yutopar&quot;</bucket>
+              <bucket>&quot;Epi E Z Pen Jr&quot;</bucket>
+              <bucket>&quot;Capozide 25/25&quot;</bucket>
+              <bucket>&quot;Azactam&quot;</bucket>
+              <bucket>&quot;Epinephrine&quot;</bucket>
+              <bucket>&quot;Gemfibrozil&quot;</bucket>
+              <bucket>&quot;Chlorhexidine Gluconate&quot;</bucket>
+              <bucket>&quot;Cardioquin&quot;</bucket>
+              <bucket>&quot;Ditropan&quot;</bucket>
+              <bucket>&quot;Ionosol Mb And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Methylphenidate Hydrochloride&quot;</bucket>
+              <bucket>&quot;Eutron&quot;</bucket>
+              <bucket>&quot;Mefoxin In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Hydrocortone&quot;</bucket>
+              <bucket>&quot;Colestipol Hydrochloride&quot;</bucket>
+              <bucket>&quot;Lopressidone&quot;</bucket>
+              <bucket>&quot;Neo-Cort-Dome&quot;</bucket>
+              <bucket>&quot;Cefuroxime And Dextrose In Duplex Container&quot;</bucket>
+              <bucket>&quot;Hydropres 25&quot;</bucket>
+              <bucket>&quot;Aminosyn 3.5\% W/ Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Eryzole&quot;</bucket>
+              <bucket>&quot;Ethril 500&quot;</bucket>
+              <bucket>&quot;Aerobid&quot;</bucket>
+              <bucket>&quot;Acetazolamide Sodium&quot;</bucket>
+              <bucket>&quot;Darvon Compound&quot;</bucket>
+              <bucket>&quot;Aristogel&quot;</bucket>
+              <bucket>&quot;Sulf-15&quot;</bucket>
+              <bucket>&quot;Tekturna&quot;</bucket>
+              <bucket>&quot;Benzyl Benzoate&quot;</bucket>
+              <bucket>&quot;Lorabid&quot;</bucket>
+              <bucket>&quot;Bumex&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.33\% And Potassium Chloride 30Meq In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dricort&quot;</bucket>
+              <bucket>&quot;Chlorascrub Swabstick&quot;</bucket>
+              <bucket>&quot;Imuran&quot;</bucket>
+              <bucket>&quot;Actinex&quot;</bucket>
+              <bucket>&quot;Otobione&quot;</bucket>
+              <bucket>&quot;Clinimix 5/35 Sulfite Free In Dextrose 35\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Caffeine Citrate&quot;</bucket>
+              <bucket>&quot;Oraqix&quot;</bucket>
+              <bucket>&quot;Theroxidil&quot;</bucket>
+              <bucket>&quot;Cytadren&quot;</bucket>
+              <bucket>&quot;Talwin Compound&quot;</bucket>
+              <bucket>&quot;Celestone Soluspan&quot;</bucket>
+              <bucket>&quot;Eligard&quot;</bucket>
+              <bucket>&quot;Hydralazine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Exjade&quot;</bucket>
+              <bucket>&quot;Hibistat&quot;</bucket>
+              <bucket>&quot;Maxitrol&quot;</bucket>
+              <bucket>&quot;Kefurox&quot;</bucket>
+              <bucket>&quot;Emete-Con&quot;</bucket>
+              <bucket>&quot;Ibu-Tab 200&quot;</bucket>
+              <bucket>&quot;Renese&quot;</bucket>
+              <bucket>&quot;Azdone&quot;</bucket>
+              <bucket>&quot;Symbicort&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 25,000 Units In Sodium Chloride 0.45\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Desyrel&quot;</bucket>
+              <bucket>&quot;Lamictal Cd&quot;</bucket>
+              <bucket>&quot;Trazodone Hydrochloride&quot;</bucket>
+              <bucket>&quot;Premphase (Premarin;Cycrin 14/14)&quot;</bucket>
+              <bucket>&quot;Decadron-La&quot;</bucket>
+              <bucket>&quot;Symlin&quot;</bucket>
+              <bucket>&quot;Fernisone&quot;</bucket>
+              <bucket>&quot;Glycort&quot;</bucket>
+              <bucket>&quot;Gonal-F&quot;</bucket>
+              <bucket>&quot;Hydroxyurea&quot;</bucket>
+              <bucket>&quot;Lidocaine Hydrochloride Preservative Free In Plastic Container&quot;</bucket>
+              <bucket>&quot;Estrogenic Substance&quot;</bucket>
+              <bucket>&quot;Promethazine Hydrochloride And Phenylephrine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Eryped&quot;</bucket>
+              <bucket>&quot;Diovan&quot;</bucket>
+              <bucket>&quot;Dv&quot;</bucket>
+              <bucket>&quot;Magnesium Sulfate In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Acylanid&quot;</bucket>
+              <bucket>&quot;Luvox&quot;</bucket>
+              <bucket>&quot;Dostinex&quot;</bucket>
+              <bucket>&quot;Myoview 30Ml&quot;</bucket>
+              <bucket>&quot;Lincomycin Hydrochloride&quot;</bucket>
+              <bucket>&quot;Codimal-L.A. 12&quot;</bucket>
+              <bucket>&quot;Revlimid&quot;</bucket>
+              <bucket>&quot;Advair Diskus 250/50&quot;</bucket>
+              <bucket>&quot;Hydro-Serp \&quot;25\&quot;&quot;</bucket>
+              <bucket>&quot;Teebacin&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 3.5\% M In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Spectazole&quot;</bucket>
+              <bucket>&quot;Quinapril Hydrochloride And Hydrochlorothiazide&quot;</bucket>
+              <bucket>&quot;Estratab&quot;</bucket>
+              <bucket>&quot;A-Hydrocort&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Sodium Chloride 0.225\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Cardiolite&quot;</bucket>
+              <bucket>&quot;Fluxid&quot;</bucket>
+              <bucket>&quot;Freamine Hbc 6.9\%&quot;</bucket>
+              <bucket>&quot;Clistin&quot;</bucket>
+              <bucket>&quot;Ovcon-35&quot;</bucket>
+              <bucket>&quot;Copegus&quot;</bucket>
+              <bucket>&quot;T-Phyl&quot;</bucket>
+              <bucket>&quot;Lodosyn&quot;</bucket>
+              <bucket>&quot;Captopril&quot;</bucket>
+              <bucket>&quot;Chloroheniramine Maleate And Phenylpropanolamine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Aminosyn 3.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dialyte W/ Dextrose 1.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Neothylline&quot;</bucket>
+              <bucket>&quot;Benylin&quot;</bucket>
+              <bucket>&quot;Sulfa-Triple \#2&quot;</bucket>
+              <bucket>&quot;Trobicin&quot;</bucket>
+              <bucket>&quot;Cyclapen-W&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 12,500 Units In Sodium Chloride 0.9\%&quot;</bucket>
+              <bucket>&quot;Mustargen&quot;</bucket>
+              <bucket>&quot;Gallium Citrate Ga 67&quot;</bucket>
+              <bucket>&quot;Vesicare&quot;</bucket>
+              <bucket>&quot;Cafcit&quot;</bucket>
+              <bucket>&quot;Triesence&quot;</bucket>
+              <bucket>&quot;Lipo-Hepin&quot;</bucket>
+              <bucket>&quot;Keftab&quot;</bucket>
+              <bucket>&quot;Levo-T&quot;</bucket>
+              <bucket>&quot;Neosar&quot;</bucket>
+              <bucket>&quot;Compazine&quot;</bucket>
+              <bucket>&quot;Avelox&quot;</bucket>
+              <bucket>&quot;Amphetamine Sulfate&quot;</bucket>
+              <bucket>&quot;Klor-Con&quot;</bucket>
+              <bucket>&quot;Akpentolate&quot;</bucket>
+              <bucket>&quot;Duranest&quot;</bucket>
+              <bucket>&quot;Ergocalciferol&quot;</bucket>
+              <bucket>&quot;Diprolene&quot;</bucket>
+              <bucket>&quot;Ortho Tri-Cyclen&quot;</bucket>
+              <bucket>&quot;Cefotetan And Dextrose In Duplex Container&quot;</bucket>
+              <bucket>&quot;Rifampin And Isoniazid&quot;</bucket>
+              <bucket>&quot;Ativan&quot;</bucket>
+              <bucket>&quot;Colyte With Flavor Packs&quot;</bucket>
+              <bucket>&quot;Radioiodinated Serum Albumin (Human) Ihsa I 125&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 1,000 Units And Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Erythromycin Ethylsuccinate&quot;</bucket>
+              <bucket>&quot;Curosurf&quot;</bucket>
+              <bucket>&quot;Homatropine Methylbromide And Hydrocodone Bitartrate&quot;</bucket>
+              <bucket>&quot;Breathtek Ubt For H-Pylori&quot;</bucket>
+              <bucket>&quot;Equetro&quot;</bucket>
+              <bucket>&quot;Imitrex&quot;</bucket>
+              <bucket>&quot;Extra-Strength Aim&quot;</bucket>
+              <bucket>&quot;Gentafair&quot;</bucket>
+              <bucket>&quot;Griseofulvin&quot;</bucket>
+              <bucket>&quot;Fluothane&quot;</bucket>
+              <bucket>&quot;8-Mop&quot;</bucket>
+              <bucket>&quot;Amifostine&quot;</bucket>
+              <bucket>&quot;Macrodantin&quot;</bucket>
+              <bucket>&quot;Isolyte M W/ Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Ergamisol&quot;</bucket>
+              <bucket>&quot;Forane&quot;</bucket>
+              <bucket>&quot;Cefmax&quot;</bucket>
+              <bucket>&quot;Zegerid Otc&quot;</bucket>
+              <bucket>&quot;Cyclacillin&quot;</bucket>
+              <bucket>&quot;Serostim Lq&quot;</bucket>
+              <bucket>&quot;Geopen&quot;</bucket>
+              <bucket>&quot;Hiprex&quot;</bucket>
+              <bucket>&quot;Janimine&quot;</bucket>
+              <bucket>&quot;Nitrol&quot;</bucket>
+              <bucket>&quot;Biphetamine 7.5&quot;</bucket>
+              <bucket>&quot;Narcan&quot;</bucket>
+              <bucket>&quot;Iplex&quot;</bucket>
+              <bucket>&quot;Methamphetamine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Chlorofair&quot;</bucket>
+              <bucket>&quot;Insulin Nordisk Mixtard (Pork)&quot;</bucket>
+              <bucket>&quot;Triacort&quot;</bucket>
+              <bucket>&quot;Clinimix 4.25/10 Sulfite Free In Dextrose 10\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Hytrin&quot;</bucket>
+              <bucket>&quot;Lamisil At&quot;</bucket>
+              <bucket>&quot;Mydriafair&quot;</bucket>
+              <bucket>&quot;Calcibind&quot;</bucket>
+              <bucket>&quot;Ortho-Novum 1/50 21&quot;</bucket>
+              <bucket>&quot;Cyclaine&quot;</bucket>
+              <bucket>&quot;Glucoscan&quot;</bucket>
+              <bucket>&quot;Drolban&quot;</bucket>
+              <bucket>&quot;Colocort&quot;</bucket>
+              <bucket>&quot;Dermotic&quot;</bucket>
+              <bucket>&quot;Fansidar&quot;</bucket>
+              <bucket>&quot;Diastat Acudial&quot;</bucket>
+              <bucket>&quot;Seconal Sodium&quot;</bucket>
+              <bucket>&quot;Amphadase&quot;</bucket>
+              <bucket>&quot;Fluoxetine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Penicillin V Potassium&quot;</bucket>
+              <bucket>&quot;Ciprofloxacin Hydrochloride&quot;</bucket>
+              <bucket>&quot;Telepaque&quot;</bucket>
+              <bucket>&quot;Colgate Total&quot;</bucket>
+              <bucket>&quot;Arfonad&quot;</bucket>
+              <bucket>&quot;Acuvail&quot;</bucket>
+              <bucket>&quot;Aeroseb-Hc&quot;</bucket>
+              <bucket>&quot;Hydra-Zide&quot;</bucket>
+              <bucket>&quot;Reserpine, Hydrochlorothiazide, And Hydralazine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Sulfamethoxazole And Trimethoprim Double Strength&quot;</bucket>
+              <bucket>&quot;Moduretic 5-50&quot;</bucket>
+              <bucket>&quot;Acetaminophen, Aspirin, And Codeine Phosphate&quot;</bucket>
+              <bucket>&quot;Femstat 3&quot;</bucket>
+              <bucket>&quot;Aviane-28&quot;</bucket>
+              <bucket>&quot;Duetact&quot;</bucket>
+              <bucket>&quot;Cefotan&quot;</bucket>
+              <bucket>&quot;Hydroxychloroquine Sulfate&quot;</bucket>
+              <bucket>&quot;Fentanyl&quot;</bucket>
+              <bucket>&quot;Foamcoat&quot;</bucket>
+              <bucket>&quot;M.V.I. Adult&quot;</bucket>
+              <bucket>&quot;Children&apos;S Motrin&quot;</bucket>
+              <bucket>&quot;Diltzac&quot;</bucket>
+              <bucket>&quot;Zanaflex&quot;</bucket>
+              <bucket>&quot;Ditate-Ds&quot;</bucket>
+              <bucket>&quot;Lastacaft&quot;</bucket>
+              <bucket>&quot;Duraquin&quot;</bucket>
+              <bucket>&quot;Alprazolam&quot;</bucket>
+              <bucket>&quot;Adderall Xr 25&quot;</bucket>
+              <bucket>&quot;Cefepime In Plastic Container&quot;</bucket>
+              <bucket>&quot;Quelicin&quot;</bucket>
+              <bucket>&quot;Iopamidol-300 In Plastic Container&quot;</bucket>
+              <bucket>&quot;Torsemide&quot;</bucket>
+              <bucket>&quot;Esmolol Hydrochloride&quot;</bucket>
+              <bucket>&quot;Brethine&quot;</bucket>
+              <bucket>&quot;Asellacrin 10&quot;</bucket>
+              <bucket>&quot;Delflex-Lm W/ Dextrose 4.25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Fulconazole In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Sudafed 24 Hour&quot;</bucket>
+              <bucket>&quot;Butazolidin&quot;</bucket>
+              <bucket>&quot;Demeclocycline Hydrochloride&quot;</bucket>
+              <bucket>&quot;Grifulvin V&quot;</bucket>
+              <bucket>&quot;Fortaz In Plastic Container&quot;</bucket>
+              <bucket>&quot;Busulfex&quot;</bucket>
+              <bucket>&quot;Hepatolite&quot;</bucket>
+              <bucket>&quot;Diethylpropion Hydrochloride&quot;</bucket>
+              <bucket>&quot;Chantix&quot;</bucket>
+              <bucket>&quot;Clonidine Hydrochloride And Chlorthalidone&quot;</bucket>
+              <bucket>&quot;Cefazolin And Dextrose&quot;</bucket>
+              <bucket>&quot;Estrovis&quot;</bucket>
+              <bucket>&quot;Casodex&quot;</bucket>
+              <bucket>&quot;Renoquid&quot;</bucket>
+              <bucket>&quot;Acetohexamide&quot;</bucket>
+              <bucket>&quot;Elixophyllin&quot;</bucket>
+              <bucket>&quot;Gelnique&quot;</bucket>
+              <bucket>&quot;Hydralazine Hydrochloride, Hydrochlorothiazide And Reserpine&quot;</bucket>
+              <bucket>&quot;Acetaminophen, Caffeine, And Dihydrocodeine Bitartrate&quot;</bucket>
+              <bucket>&quot;Tri-Sprintec&quot;</bucket>
+              <bucket>&quot;Dienestrol&quot;</bucket>
+              <bucket>&quot;Datscan&quot;</bucket>
+              <bucket>&quot;Tri-Norinyl 21-Day&quot;</bucket>
+              <bucket>&quot;Capozide 50/25&quot;</bucket>
+              <bucket>&quot;Bupivacaine Hydrochloride W/Epinephrine&quot;</bucket>
+              <bucket>&quot;Ravocaine And Novocain W/ Levophed&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% And Sodium Chloride 0.33\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 5,000 Units In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Quibron-T/Sr&quot;</bucket>
+              <bucket>&quot;Pre-Op Ii&quot;</bucket>
+              <bucket>&quot;Resectisol In Plastic Container&quot;</bucket>
+              <bucket>&quot;Depen&quot;</bucket>
+              <bucket>&quot;Regonol&quot;</bucket>
+              <bucket>&quot;Amrinone Lactate&quot;</bucket>
+              <bucket>&quot;Amlodipine Besylate&quot;</bucket>
+              <bucket>&quot;Alphagan P&quot;</bucket>
+              <bucket>&quot;Zuplenz&quot;</bucket>
+              <bucket>&quot;Dianeal 137 W/ Dextrose 1.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Calciparine&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 20Meq In Dextrose 5\% And Sodium Chloride 0.225\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Locoid Lipocream&quot;</bucket>
+              <bucket>&quot;Chenix&quot;</bucket>
+              <bucket>&quot;Betapace Af&quot;</bucket>
+              <bucket>&quot;Cobavite&quot;</bucket>
+              <bucket>&quot;Haloperidol Decanoate&quot;</bucket>
+              <bucket>&quot;Carmol Hc&quot;</bucket>
+              <bucket>&quot;Pseudo-12&quot;</bucket>
+              <bucket>&quot;Clenz-Lyte&quot;</bucket>
+              <bucket>&quot;Felbatol&quot;</bucket>
+              <bucket>&quot;Mycifradin&quot;</bucket>
+              <bucket>&quot;Dentipatch&quot;</bucket>
+              <bucket>&quot;Trilyte&quot;</bucket>
+              <bucket>&quot;Adderall 15&quot;</bucket>
+              <bucket>&quot;Actos&quot;</bucket>
+              <bucket>&quot;Cephalothin&quot;</bucket>
+              <bucket>&quot;Carbatrol&quot;</bucket>
+              <bucket>&quot;Sarisol No. 1&quot;</bucket>
+              <bucket>&quot;Tobradex St&quot;</bucket>
+              <bucket>&quot;Monistat-Derm&quot;</bucket>
+              <bucket>&quot;Fulvicin-U/F&quot;</bucket>
+              <bucket>&quot;Centany&quot;</bucket>
+              <bucket>&quot;Lithium Carbonate&quot;</bucket>
+              <bucket>&quot;Dexacidin&quot;</bucket>
+              <bucket>&quot;Children&apos;S Advil Allergy Sinus&quot;</bucket>
+              <bucket>&quot;Chirhostim&quot;</bucket>
+              <bucket>&quot;Dexone 0.5&quot;</bucket>
+              <bucket>&quot;Tolectin 600&quot;</bucket>
+              <bucket>&quot;Zylet&quot;</bucket>
+              <bucket>&quot;Dextrose 2.5\% And Sodium Chloride 0.11\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Ganciclovir&quot;</bucket>
+              <bucket>&quot;Advair Diskus 500/50&quot;</bucket>
+              <bucket>&quot;Furadantin&quot;</bucket>
+              <bucket>&quot;Promethazine W/ Codeine&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 10,000 Units In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Femring&quot;</bucket>
+              <bucket>&quot;Ceptaz&quot;</bucket>
+              <bucket>&quot;Trasylol&quot;</bucket>
+              <bucket>&quot;Travase&quot;</bucket>
+              <bucket>&quot;Cardene&quot;</bucket>
+              <bucket>&quot;Hydrocodone Bitartrate And Ibuprofen&quot;</bucket>
+              <bucket>&quot;Chloroptic S.O.P.&quot;</bucket>
+              <bucket>&quot;Paskalium&quot;</bucket>
+              <bucket>&quot;Gencept 10/11-28&quot;</bucket>
+              <bucket>&quot;Fortovase&quot;</bucket>
+              <bucket>&quot;Cholestyramine Light&quot;</bucket>
+              <bucket>&quot;Cleocin Hydrochloride&quot;</bucket>
+              <bucket>&quot;Bleomycin Sulfate&quot;</bucket>
+              <bucket>&quot;Imipramine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Calmurid Hc&quot;</bucket>
+              <bucket>&quot;Creon&quot;</bucket>
+              <bucket>&quot;Concerta&quot;</bucket>
+              <bucket>&quot;Habitrol&quot;</bucket>
+              <bucket>&quot;Didanosine&quot;</bucket>
+              <bucket>&quot;Delflex W/ Dextrose 4.25\% Low Magnesium Low Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Desonide&quot;</bucket>
+              <bucket>&quot;Sulfatrim&quot;</bucket>
+              <bucket>&quot;Cyclocort&quot;</bucket>
+              <bucket>&quot;Norlestrin 28 1/50&quot;</bucket>
+              <bucket>&quot;Triaminic-12&quot;</bucket>
+              <bucket>&quot;Augmentin &apos;125&apos;&quot;</bucket>
+              <bucket>&quot;Isocaine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Children&apos;S Fexofenadine Hydrochloride Hives&quot;</bucket>
+              <bucket>&quot;Eryderm&quot;</bucket>
+              <bucket>&quot;Hispril&quot;</bucket>
+              <bucket>&quot;Hexadrol&quot;</bucket>
+              <bucket>&quot;Pyrilamine Maleate&quot;</bucket>
+              <bucket>&quot;Children&apos;S Claritin&quot;</bucket>
+              <bucket>&quot;Dynacirc Cr&quot;</bucket>
+              <bucket>&quot;Lax-Lyte With Flavor Packs&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 40Meq In Plastic Container&quot;</bucket>
+              <bucket>&quot;Lidocaine Hydrochloride 0.8\% In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Tradjenta&quot;</bucket>
+              <bucket>&quot;Valrelease&quot;</bucket>
+              <bucket>&quot;Alphatrex&quot;</bucket>
+              <bucket>&quot;Candex&quot;</bucket>
+              <bucket>&quot;Triavil 4-25&quot;</bucket>
+              <bucket>&quot;Amnesteem&quot;</bucket>
+              <bucket>&quot;Alcohol 10\% And Dextrose 5\%&quot;</bucket>
+              <bucket>&quot;Trancopal&quot;</bucket>
+              <bucket>&quot;Esidrix&quot;</bucket>
+              <bucket>&quot;Biphetap&quot;</bucket>
+              <bucket>&quot;Heparin Sodium 25,000 Units In Sodium Chloride 0.9\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Cefadyl&quot;</bucket>
+              <bucket>&quot;Kafocin&quot;</bucket>
+              <bucket>&quot;Nicotrol&quot;</bucket>
+              <bucket>&quot;Duracillin A.S.&quot;</bucket>
+              <bucket>&quot;Delflex-Lm W/ Dextrose 1.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Abilify&quot;</bucket>
+              <bucket>&quot;Menopur&quot;</bucket>
+              <bucket>&quot;Lidocaine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Cefpiramide Sodium&quot;</bucket>
+              <bucket>&quot;Dextrose 10\% And Sodium Chloride 0.33\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Triprolidine And Pseudoephedrine Hydrochlorides&quot;</bucket>
+              <bucket>&quot;Dianeal Pd-1 W/ Dextrose 2.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Mupirocin&quot;</bucket>
+              <bucket>&quot;Delflex W/ Dextrose 2.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Enlon&quot;</bucket>
+              <bucket>&quot;E-Z Scrub&quot;</bucket>
+              <bucket>&quot;Imodium Multi-Symptom Relief&quot;</bucket>
+              <bucket>&quot;Nascobal&quot;</bucket>
+              <bucket>&quot;Clorazepate Dipotassium&quot;</bucket>
+              <bucket>&quot;E-Z Scrub 241&quot;</bucket>
+              <bucket>&quot;Levonorgestrel And Ethinyl Estradiol And Ethinyl Estradiol&quot;</bucket>
+              <bucket>&quot;Herplex&quot;</bucket>
+              <bucket>&quot;Zefazone In Plastic Container&quot;</bucket>
+              <bucket>&quot;Epipen Jr.&quot;</bucket>
+              <bucket>&quot;Lidocaine Hydrochloride 0.4\% In Dextrose 5\%&quot;</bucket>
+              <bucket>&quot;Zerit Xr&quot;</bucket>
+              <bucket>&quot;Xylocaine W/ Epinephrine&quot;</bucket>
+              <bucket>&quot;Dextrose 4\% In Modified Lactated Ringer&apos;S In Plastic Container&quot;</bucket>
+              <bucket>&quot;Aerolate Jr&quot;</bucket>
+              <bucket>&quot;Lidocaine Hydrochloride 0.2\% And Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Epoprostenol Sodium&quot;</bucket>
+              <bucket>&quot;Dexacen-4&quot;</bucket>
+              <bucket>&quot;Travasol 2.75\% Sulfite Free W/ Electrolytes In Dextrose 10\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Campral&quot;</bucket>
+              <bucket>&quot;Anestacon&quot;</bucket>
+              <bucket>&quot;Travasol 4.25\% Sulfite Free W/ Electrolytes In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Acetasol Hc&quot;</bucket>
+              <bucket>&quot;Janumet&quot;</bucket>
+              <bucket>&quot;Calcitonin-Salmon&quot;</bucket>
+              <bucket>&quot;Isopaque 440&quot;</bucket>
+              <bucket>&quot;Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Bronkosol&quot;</bucket>
+              <bucket>&quot;Demi-Regroton&quot;</bucket>
+              <bucket>&quot;Duo-Medihaler&quot;</bucket>
+              <bucket>&quot;Guanabenz Acetate&quot;</bucket>
+              <bucket>&quot;Mycelex-7&quot;</bucket>
+              <bucket>&quot;Dianeal Low Calcium W/ Dextrose 3.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Android-F&quot;</bucket>
+              <bucket>&quot;Claritin-D&quot;</bucket>
+              <bucket>&quot;Ledercillin Vk&quot;</bucket>
+              <bucket>&quot;Aldactazide&quot;</bucket>
+              <bucket>&quot;Ablavar&quot;</bucket>
+              <bucket>&quot;Alsuma&quot;</bucket>
+              <bucket>&quot;Adderall Xr 5&quot;</bucket>
+              <bucket>&quot;Carisoprodol Compound&quot;</bucket>
+              <bucket>&quot;Bioscrub&quot;</bucket>
+              <bucket>&quot;Clinimix E 5/20 Sulfite-Free W/ Elect In 20\% Dextrose W/ Calcium In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dilantin-125&quot;</bucket>
+              <bucket>&quot;Glipizide And Metformin Hydrochloride&quot;</bucket>
+              <bucket>&quot;Hydropres 50&quot;</bucket>
+              <bucket>&quot;Guanidine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Aminosyn Ii 3.5\% In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Cordran-N&quot;</bucket>
+              <bucket>&quot;Flecainide Acetate&quot;</bucket>
+              <bucket>&quot;Letrozole&quot;</bucket>
+              <bucket>&quot;Delaxin&quot;</bucket>
+              <bucket>&quot;Sulfalar&quot;</bucket>
+              <bucket>&quot;Cytovene&quot;</bucket>
+              <bucket>&quot;Tussigon&quot;</bucket>
+              <bucket>&quot;Clinisol 15\% Sulfite Free In Plastic Container&quot;</bucket>
+              <bucket>&quot;Fortesta&quot;</bucket>
+              <bucket>&quot;Gyne-Sulf&quot;</bucket>
+              <bucket>&quot;Isoetharine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Dexamethasone Sodium Phosphate&quot;</bucket>
+              <bucket>&quot;Crinone&quot;</bucket>
+              <bucket>&quot;Hydro-D&quot;</bucket>
+              <bucket>&quot;Septisol&quot;</bucket>
+              <bucket>&quot;Lidex&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.2\% And Potassium Chloride 20Meq (K)&quot;</bucket>
+              <bucket>&quot;Canasa&quot;</bucket>
+              <bucket>&quot;Cinnasil&quot;</bucket>
+              <bucket>&quot;Zantac 25&quot;</bucket>
+              <bucket>&quot;Focalin Xr&quot;</bucket>
+              <bucket>&quot;Bupivacaine Hydrochloride And Epinephrine&quot;</bucket>
+              <bucket>&quot;Depodur&quot;</bucket>
+              <bucket>&quot;Chloraprep One-Step Frepp&quot;</bucket>
+              <bucket>&quot;Humalog Kwikpen&quot;</bucket>
+              <bucket>&quot;Dextrose 5\%, Sodium Chloride 0.2\% And Potassium Chloride 5Meq&quot;</bucket>
+              <bucket>&quot;Travasol 3.5\% W/ Electrolytes&quot;</bucket>
+              <bucket>&quot;Vancocin Hydrochloride In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dianeal Pd-2 W/ Dextrose 1.5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dexilant&quot;</bucket>
+              <bucket>&quot;Artane&quot;</bucket>
+              <bucket>&quot;Talc&quot;</bucket>
+              <bucket>&quot;Android 10&quot;</bucket>
+              <bucket>&quot;Colovage&quot;</bucket>
+              <bucket>&quot;Chlordiazachel&quot;</bucket>
+              <bucket>&quot;Hydrocortisone Valerate&quot;</bucket>
+              <bucket>&quot;Chirocaine&quot;</bucket>
+              <bucket>&quot;Oraverse&quot;</bucket>
+              <bucket>&quot;Glucagen&quot;</bucket>
+              <bucket>&quot;Hydro-Reserp&quot;</bucket>
+              <bucket>&quot;Amikin&quot;</bucket>
+              <bucket>&quot;Lidosite Topical System Kit&quot;</bucket>
+              <bucket>&quot;Ticlopidine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Desmopressin Acetate&quot;</bucket>
+              <bucket>&quot;Cyclopentolate Hydrochloride&quot;</bucket>
+              <bucket>&quot;Calan&quot;</bucket>
+              <bucket>&quot;Travasol 4.25\% In Dextrose 25\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Doxycycline Hyclate&quot;</bucket>
+              <bucket>&quot;Valmid&quot;</bucket>
+              <bucket>&quot;Triprolidine Hydrochloride&quot;</bucket>
+              <bucket>&quot;Captopril And Hydrochlorothiazide&quot;</bucket>
+              <bucket>&quot;Bilopaque&quot;</bucket>
+              <bucket>&quot;Azilect&quot;</bucket>
+              <bucket>&quot;Chloromycetin Hydrocortisone&quot;</bucket>
+              <bucket>&quot;Serophene&quot;</bucket>
+              <bucket>&quot;Imipramine Pamoate&quot;</bucket>
+              <bucket>&quot;Amlodipine Besylate And Benazepril Hydrochloride&quot;</bucket>
+              <bucket>&quot;Celexa&quot;</bucket>
+              <bucket>&quot;Triphasil-28&quot;</bucket>
+              <bucket>&quot;Timentin&quot;</bucket>
+              <bucket>&quot;Cholovue&quot;</bucket>
+              <bucket>&quot;Buticaps&quot;</bucket>
+              <bucket>&quot;Potassium Chloride 15Meq In Dextrose 5\% And Lactated Ringer&apos;S In Plastic Container&quot;</bucket>
+              <bucket>&quot;Travasol 2.75\% Sulfite Free W/ Electrolytes In Dextrose 5\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Dexamethasone&quot;</bucket>
+              <bucket>&quot;Diucardin&quot;</bucket>
+              <bucket>&quot;Trandate Hct&quot;</bucket>
+              <bucket>&quot;Gemzar&quot;</bucket>
+              <bucket>&quot;An-Dtpa&quot;</bucket>
+              <bucket>&quot;Carafate&quot;</bucket>
+              <bucket>&quot;Gemcitabine&quot;</bucket>
+              <bucket>&quot;Doxil&quot;</bucket>
+              <bucket>&quot;Travasol 4.25\% In Dextrose 10\% In Plastic Container&quot;</bucket>
+              <bucket>&quot;Humulin R&quot;</bucket>
+              <bucket>&quot;Hydroserpine Plus (R-H-H)&quot;</bucket>
+              <bucket>&quot;Delcobese&quot;</bucket>
+              <bucket>&quot;Alocril&quot;</bucket>
+              <bucket>&quot;Humorsol&quot;</bucket>
+              <bucket>&quot;Erythro-Statin&quot;</bucket>
+              <bucket>&quot;Dipyridamole&quot;</bucket>
+              <bucket>&quot;Adagen&quot;</bucket>
+              <bucket>&quot;Banthine&quot;</bucket>
+              <bucket>&quot;Budesonide&quot;</bucket>
+              <bucket>%all%</bucket>
+            </dictionary>
+          </manual-sort>
+          <slices>
+            <column>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Calculation_651051629349236736:nk]</column>
+            <column>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='parameter-ctrl'>
+            <format attr='title' field='[Parameters].[Product Base Margin Parameter]' value='Top N (Type value range: 1 to 1218)'>
+              <formatted-text>
+                <run>Top N (Type value range: 1 to 1218)</run>
+              </formatted-text>
+            </format>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Supplier:nk]' />
+            </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>For Drug </run>
+                <run bold='true'>&lt;[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]&gt;</run>
+                <run fontcolor='#787878'> Supplier </run>
+                <run bold='true'>&lt;[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Supplier:nk]&gt;</run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>has a market share of </run>
+                <run bold='true' fontsize='12'>&lt;[federated.0xrfp400he6f3111x0rl60h5e91o].[pcto:sum:Rx Dollars:qk:5]&gt; </run>
+              </formatted-text>
+            </customized-tooltip>
+          </pane>
+        </panes>
+        <rows>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]</rows>
+        <cols>[federated.0xrfp400he6f3111x0rl60h5e91o].[pcto:sum:Rx Dollars:qk:5]</cols>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='65'>
+    <window class='worksheet' maximized='true' name='Q1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='caption' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card custom-title='true' mode='type_in' param='[Parameters].[Product Base Margin Parameter]' type='parameter' />
+            <card pane-specification-id='0' param='[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Supplier:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Calculation_651051629349236736:nk]</field>
+            <field>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Name:nk]</field>
+            <field>[federated.0xrfp400he6f3111x0rl60h5e91o].[none:Drug Supplier:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Q1' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
